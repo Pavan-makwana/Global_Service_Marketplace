@@ -38,7 +38,7 @@ export const Avatar = ({ initials, size = "md", color = "blue" }) => {
   );
 };
 
-// ── BADGE ──────────────────────────────────────────────────────────
+//BADGE 
 export const Badge = ({ children, variant = "gray" }) => {
   const v = {
     gray:   "bg-slate-100 text-slate-600",
@@ -56,14 +56,14 @@ export const Badge = ({ children, variant = "gray" }) => {
   );
 };
 
-// ── SKILL CHIP ─────────────────────────────────────────────────────
+//SKILL CHIP 
 export const Chip = ({ label }) => (
   <span className="inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100">
     {label}
   </span>
 );
 
-// ── BUTTON ─────────────────────────────────────────────────────────
+//BUTTON 
 export const Btn = ({
   children, variant = "primary", size = "md",
   onClick, disabled, full, type = "button",
@@ -97,7 +97,7 @@ export const Btn = ({
   );
 };
 
-// ── INPUT FIELD ────────────────────────────────────────────────────
+//INPUT FIELD
 export const Input = ({
   label, type = "text", placeholder, value, onChange,
   error, icon, required, hint,
@@ -130,7 +130,7 @@ export const Input = ({
   </div>
 );
 
-// ── SELECT FIELD ───────────────────────────────────────────────────
+//SELECT FIELD
 export const Select = ({ label, value, onChange, options, required }) => (
   <div className="mb-4">
     {label && (
@@ -152,7 +152,7 @@ export const Select = ({ label, value, onChange, options, required }) => (
   </div>
 );
 
-// ── TEXTAREA ───────────────────────────────────────────────────────
+// TEXTAREA 
 export const Textarea = ({ label, placeholder, value, onChange, rows = 4, required }) => (
   <div className="mb-4">
     {label && (
@@ -172,7 +172,7 @@ export const Textarea = ({ label, placeholder, value, onChange, rows = 4, requir
   </div>
 );
 
-// ── PASSWORD INPUT ─────────────────────────────────────────────────
+//PASSWORD INPUT
 export const PasswordInput = ({
   label, value, onChange, error, required, showStrength,
 }) => {
@@ -236,7 +236,7 @@ export const PasswordInput = ({
   );
 };
 
-// ── CARD ───────────────────────────────────────────────────────────
+//CARD 
 export const Card = ({ children, className = "", onClick }) => (
   <div
     onClick={onClick}
@@ -248,7 +248,7 @@ export const Card = ({ children, className = "", onClick }) => (
   </div>
 );
 
-// ── STAT TILE ──────────────────────────────────────────────────────
+// STAT TILE 
 export const StatTile = ({ label, value, sub, icon, topColor = "bg-blue-900" }) => (
   <Card>
     <div className={`h-1 rounded-t-2xl ${topColor}`} />
@@ -263,7 +263,7 @@ export const StatTile = ({ label, value, sub, icon, topColor = "bg-blue-900" }) 
   </Card>
 );
 
-// ── TOP NAV BAR ────────────────────────────────────────────────────
+// TOP NAV BAR 
 export const TopNav = ({ setPage, role, onLogout }) => (
   <nav className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
     <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -289,7 +289,7 @@ export const TopNav = ({ setPage, role, onLogout }) => (
   </nav>
 );
 
-// ── STARS RATING ───────────────────────────────────────────────────
+//STARS RATING 
 export const Stars = ({ rating }) => (
   <span className="flex items-center gap-0.5">
     {[1,2,3,4,5].map(i => (
@@ -299,7 +299,7 @@ export const Stars = ({ rating }) => (
   </span>
 );
 
-// ── AI MATCH RING (SVG) ────────────────────────────────────────────
+// AI MATCH RING (SVG) 
 export const MatchRing = ({ score, size = 56 }) => {
   const r = (size - 8) / 2;
   const c = 2 * Math.PI * r;
@@ -323,7 +323,7 @@ export const MatchRing = ({ score, size = 56 }) => {
   );
 };
 
-// ── MULTI-STEP PROGRESS BAR ────────────────────────────────────────
+// MULTI-STEP PROGRESS BAR 
 export const Stepper = ({ steps, current }) => (
   <div className="flex items-center gap-2 mb-6">
     {steps.map((s, i) => (
@@ -345,7 +345,7 @@ export const Stepper = ({ steps, current }) => (
   </div>
 );
 
-// ── TAB BAR ────────────────────────────────────────────────────────
+// TAB BAR 
 export const TabBar = ({ tabs, active, onChange }) => (
   <div className="flex border-b border-slate-200 mb-6 overflow-x-auto">
     {tabs.map(t => (
@@ -363,7 +363,7 @@ export const TabBar = ({ tabs, active, onChange }) => (
   </div>
 );
 
-// ── TOAST NOTIFICATION ─────────────────────────────────────────────
+// TOAST NOTIFICATION 
 export const Toast = ({ msg, type, onClose }) => (
   <div
     className={`fixed top-5 right-5 z-[9999] flex items-center gap-3 px-5 py-3 rounded-xl shadow-xl border
@@ -378,7 +378,7 @@ export const Toast = ({ msg, type, onClose }) => (
   </div>
 );
 
-// ── DIVIDER WITH TEXT ──────────────────────────────────────────────
+//DIVIDER WITH TEXT 
 export const Divider = ({ text }) => (
   <div className="flex items-center gap-3 my-5 text-slate-400 text-xs">
     <div className="flex-1 h-px bg-slate-200" />
@@ -387,7 +387,7 @@ export const Divider = ({ text }) => (
   </div>
 );
 
-// ── AUTH LEFT PANEL (shared structure) ────────────────────────────
+// AUTH LEFT PANEL 
 export const AuthPanel = ({ gradient, children }) => (
   <div
     className={`hidden lg:flex w-5/12 flex-col p-12 relative overflow-hidden ${gradient}`}
@@ -405,7 +405,7 @@ export const AuthPanel = ({ gradient, children }) => (
   </div>
 );
 
-// ── AUTH RIGHT PANEL (shared structure) ───────────────────────────
+// AUTH RIGHT PANEL 
 export const AuthRight = ({ switchText, switchLabel, onSwitch, children }) => (
   <div className="flex-1 bg-slate-50 flex flex-col overflow-y-auto">
     <div className="flex justify-between items-center px-8 py-5 border-b border-slate-200 bg-white">
@@ -425,7 +425,7 @@ export const AuthRight = ({ switchText, switchLabel, onSwitch, children }) => (
 
 
 
-// ── SECTION LABEL PILL ─────────────────────────────────────────────
+// SECTION LABEL PILL 
 export const PillLabel = ({ children, color = "blue" }) => {
   const c = {
     blue:  "bg-blue-100 text-blue-800",
@@ -439,7 +439,7 @@ export const PillLabel = ({ children, color = "blue" }) => {
   );
 };
 
-// ── LEFT PANEL BENEFITS LIST ───────────────────────────────────────
+// LEFT PANEL BENEFITS LIST 
 export const BenefitList = ({ items, textColor = "text-blue-100", checkColor = "text-sky-300" }) => (
   <div className="flex flex-col gap-3">
     {items.map(b => (
@@ -453,7 +453,7 @@ export const BenefitList = ({ items, textColor = "text-blue-100", checkColor = "
   </div>
 );
 
-// ── ADMIN HINT BOX ─────────────────────────────────────────────────
+// ADMIN HINT BOX 
 export const AdminHint = () => (
   <div className="mt-5 bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-emerald-800">
     <strong>🛡 Admin?</strong> Enter{" "}

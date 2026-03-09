@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { ADMIN_CREDENTIALS } from "../constants/data";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Admin Login (dedicated dark-theme portal)
-// Route: "admin-login"
-// Access: Admin only
-// Credentials: admin@SmartDev Marketplace.com / Admin@2025
-// ─────────────────────────────────────────────────────────────────
+
 
 export default function AdminLoginPage({ setPage, onLogin }) {
   const [email, setEmail]   = useState("");
@@ -36,7 +31,6 @@ export default function AdminLoginPage({ setPage, onLogin }) {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
 
-        {/* ── LOGO & HEADING ── */}
         <div className="text-center mb-8">
           <div
             onClick={() => setPage("home")}
@@ -50,10 +44,8 @@ export default function AdminLoginPage({ setPage, onLogin }) {
           <p className="text-slate-400 text-sm">Restricted access — authorised personnel only</p>
         </div>
 
-        {/* ── FORM CARD ── */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
 
-          {/* credentials badge */}
           <div className="flex items-center gap-3 bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 mb-6">
             <span className="text-amber-400 text-xl flex-shrink-0">⚙️</span>
             <div>
@@ -62,7 +54,6 @@ export default function AdminLoginPage({ setPage, onLogin }) {
             </div>
           </div>
 
-          {/* email */}
           <div className="mb-4">
             <label className="block text-sm font-semibold text-slate-300 mb-1.5">
               Admin Email <span className="text-red-400">*</span>
@@ -81,7 +72,6 @@ export default function AdminLoginPage({ setPage, onLogin }) {
             </div>
           </div>
 
-          {/* password */}
           <div className="mb-5">
             <label className="block text-sm font-semibold text-slate-300 mb-1.5">
               Password <span className="text-red-400">*</span>
@@ -108,14 +98,12 @@ export default function AdminLoginPage({ setPage, onLogin }) {
             </div>
           </div>
 
-          {/* error message */}
           {error && (
             <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-red-400 text-sm mb-4 flex items-center gap-2">
               <span>⚠</span> {error}
             </div>
           )}
 
-          {/* submit */}
           <button
             onClick={submit}
             disabled={loading}
@@ -129,12 +117,10 @@ export default function AdminLoginPage({ setPage, onLogin }) {
           </button>
         </div>
 
-        {/* ── SECURITY NOTE ── */}
         <div className="mt-4 text-center text-xs text-slate-600 leading-relaxed">
           All admin actions are logged. Unauthorised access attempts are recorded.
         </div>
 
-        {/* back link */}
         <div className="text-center mt-6">
           <span
             onClick={() => setPage("home")}

@@ -2,11 +2,6 @@ import { useState } from "react";
 import { TopNav, Card, StatTile, Badge, Chip, Btn, TabBar, Avatar, Stars, MatchRing, Stepper } from "../components/ui";
 import { DEVS, SKILLS_LIST } from "../constants/data";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Client Dashboard
-// Route: "client-dashboard"
-// Access: Client only
-// ─────────────────────────────────────────────────────────────────
 
 export default function ClientDashboard({ setPage, setSelectedProject, onLogout, projects = [] }) {
   const [tab, setTab] = useState("projects");
@@ -15,7 +10,6 @@ export default function ClientDashboard({ setPage, setSelectedProject, onLogout,
     <div className="min-h-screen bg-slate-50">
       <TopNav setPage={setPage} role="client" onLogout={onLogout || (() => setPage("home"))} />
 
-      {/* HERO BANNER */}
       <div className="bg-gradient-to-r from-amber-700 to-orange-600 py-10 px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-4">
           <div>
@@ -28,7 +22,6 @@ export default function ClientDashboard({ setPage, setSelectedProject, onLogout,
 
       <div className="max-w-7xl mx-auto px-6 py-8">
 
-        {/* KPI TILES */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <StatTile label="My Projects"     value="9"       sub="3 active"            icon="📋" topColor="bg-amber-500"  />
           <StatTile label="Total Spend"     value="$128K"   sub="Across 9 projects"   icon="💰" topColor="bg-emerald-500"/>
@@ -36,7 +29,6 @@ export default function ClientDashboard({ setPage, setSelectedProject, onLogout,
           <StatTile label="Avg Dev Rating"  value="4.93★"   sub="From completed work" icon="⭐" topColor="bg-blue-900"   />
         </div>
 
-        {/* TABS */}
         <TabBar
           tabs={[
             { id:"projects",        label:"My Projects" },
@@ -47,7 +39,6 @@ export default function ClientDashboard({ setPage, setSelectedProject, onLogout,
           onChange={setTab}
         />
 
-        {/* ── MY PROJECTS TAB ── */}
         {tab === "projects" && (
           <div className="flex flex-col gap-4">
             {projects.map(p => (
@@ -89,7 +80,6 @@ export default function ClientDashboard({ setPage, setSelectedProject, onLogout,
           </div>
         )}
 
-        {/* ── AI RECOMMENDATIONS TAB ── */}
         {tab === "recommendations" && (
           <div>
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-5 flex items-start gap-3">
@@ -129,19 +119,16 @@ export default function ClientDashboard({ setPage, setSelectedProject, onLogout,
           </div>
         )}
 
-        {/* ── POST PROJECT TAB ── */}
         {tab === "post" && <PostProjectForm onSuccess={() => setTab("projects")} />}
       </div>
     </div>
   );
 }
 
-// ── POST PROJECT WIZARD (inline sub-component) ────────────────────
 function PostProjectForm({ onSuccess }) {
   const [step, setStep]               = useState(0);
   const [done, setDone]               = useState(false);
 
-  // Field state
   const [title, setTitle]             = useState("");
   const [desc, setDesc]               = useState("");
   const [category, setCategory]       = useState("");
@@ -182,7 +169,6 @@ function PostProjectForm({ onSuccess }) {
 
       <Card className="p-8">
 
-        {/* STEP 0: BASIC INFO */}
         {step === 0 && (
           <>
             <div className="mb-4">
@@ -229,7 +215,6 @@ function PostProjectForm({ onSuccess }) {
           </>
         )}
 
-        {/* STEP 1: SKILLS & BUDGET */}
         {step === 1 && (
           <>
             <p className="text-sm font-bold text-slate-700 mb-2">Required Skills <span className="text-red-500">*</span></p>
@@ -267,7 +252,6 @@ function PostProjectForm({ onSuccess }) {
           </>
         )}
 
-        {/* STEP 2: REVIEW */}
         {step === 2 && (
           <div>
             <h3 className="font-black text-slate-800 mb-4">Review Your Project</h3>
@@ -290,7 +274,6 @@ function PostProjectForm({ onSuccess }) {
           </div>
         )}
 
-        {/* NAVIGATION */}
         <div className="flex gap-3 mt-6">
           {step > 0 && (
             <Btn variant="ghost" onClick={() => setStep(s => s - 1)}>← Back</Btn>

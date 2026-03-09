@@ -2,13 +2,6 @@ import { useState } from "react";
 import { Logo, Input, PasswordInput, Btn, Toast, Divider, PillLabel, AuthPanel, BenefitList, AdminHint } from "../components/ui";
 import { ADMIN_CREDENTIALS } from "../constants/data";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Developer Login
-// Route: "dev-login"
-// Access: Public
-// NOTE: Admin can also log in here using admin credentials.
-// ─────────────────────────────────────────────────────────────────
-
 export default function DevLoginPage({ setPage, onLogin }) {
   const [email, setEmail]     = useState("");
   const [pass, setPass]       = useState("");
@@ -17,7 +10,6 @@ export default function DevLoginPage({ setPage, onLogin }) {
   const [toast, setToast]     = useState(null);
   const [remember, setRemember] = useState(false);
 
-  // ── SUBMIT ────────────────────────────────────────────────────
   const submit = () => {
     const e = {};
     if (!email) e.email = "Email is required";
@@ -46,7 +38,6 @@ export default function DevLoginPage({ setPage, onLogin }) {
     <div className="min-h-screen flex">
       {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
 
-      {/* ── LEFT PANEL ── */}
       <AuthPanel gradient="bg-gradient-to-br from-blue-900 to-blue-800">
         <div className="relative">
           <Logo dark onClick={() => setPage("home")} />
@@ -70,7 +61,6 @@ export default function DevLoginPage({ setPage, onLogin }) {
           />
         </div>
 
-        {/* Admin hint box */}
         <div className="relative bg-white/10 border border-white/15 rounded-xl p-4 backdrop-blur-sm">
           <p className="text-xs font-bold text-sky-300 mb-1">🛡 Admin Access</p>
           <p className="text-blue-200 text-xs leading-relaxed">
@@ -82,9 +72,7 @@ export default function DevLoginPage({ setPage, onLogin }) {
         </div>
       </AuthPanel>
 
-      {/* ── RIGHT PANEL ── */}
       <div className="flex-1 bg-slate-50 flex flex-col overflow-y-auto">
-        {/* top bar */}
         <div className="flex justify-between items-center px-8 py-5 border-b border-slate-200 bg-white">
           <div className="lg:hidden"><Logo onClick={() => setPage("home")} /></div>
           <div className="hidden lg:block" />
@@ -96,7 +84,6 @@ export default function DevLoginPage({ setPage, onLogin }) {
           </p>
         </div>
 
-        {/* form body */}
         <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full px-8 py-10">
           <div className="mb-6">
             <PillLabel color="blue">💻 DEVELOPER PORTAL</PillLabel>
@@ -105,7 +92,6 @@ export default function DevLoginPage({ setPage, onLogin }) {
           </div>
 
   
-          {/* Fields */}
           <Input
             label="Email Address" type="email"
             placeholder="developer@example.com"
@@ -118,7 +104,6 @@ export default function DevLoginPage({ setPage, onLogin }) {
             error={errors.pass} required
           />
 
-          {/* Remember + forgot */}
           <div className="flex justify-between items-center mb-5">
             <label className="flex items-center gap-2 text-sm text-slate-500 cursor-pointer">
               <input
@@ -133,16 +118,13 @@ export default function DevLoginPage({ setPage, onLogin }) {
             </span>
           </div>
 
-          {/* Submit */}
           <Btn full size="lg" onClick={submit} disabled={loading}>
             {loading ? "Signing in…" : "Sign In →"}
           </Btn>
 
-          {/* Admin hint */}
           <AdminHint />
         </div>
 
-        {/* bottom link */}
         <div className="text-center py-4 border-t border-slate-200 bg-white">
           <p className="text-sm text-slate-500">
             Hiring talent?{" "}

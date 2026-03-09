@@ -2,12 +2,6 @@ import { useState } from "react";
 import { Logo, Input, Select, PasswordInput, Stepper, Btn, PillLabel, AuthPanel, BenefitList } from "../components/ui";
 import { COUNTRIES } from "../constants/data";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Client Registration (2-step)
-// Route: "client-register"
-// Access: Public
-// ─────────────────────────────────────────────────────────────────
-
 const SIZES = [
   { value:"",      label:"Select company size" },
   { value:"1-10",  label:"1–10 employees" },
@@ -35,7 +29,6 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
   const [done, setDone]         = useState(false);
   const [errors, setErrors]     = useState({});
 
-  // Step 0 — Account Details
   const [name, setName]         = useState("");
   const [company, setCompany]   = useState("");
   const [email, setEmail]       = useState("");
@@ -43,12 +36,10 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
   const [size, setSize]         = useState("");
   const [industry, setIndustry] = useState("");
 
-  // Step 1 — Password & Terms
   const [pass, setPass]         = useState("");
   const [confirm, setConfirm]   = useState("");
   const [agree, setAgree]       = useState(false);
 
-  // ── VALIDATION ─────────────────────────────────────────────────
   const validate = () => {
     const e = {};
     if (step === 0) {
@@ -72,7 +63,6 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
     setDone(true);
   };
 
-  // ── SUCCESS SCREEN ─────────────────────────────────────────────
   if (done) return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center p-6">
       <div className="text-center max-w-md w-full">
@@ -101,7 +91,6 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
   return (
     <div className="min-h-screen flex">
 
-      {/* ── LEFT PANEL ── */}
       <AuthPanel gradient="bg-gradient-to-br from-amber-700 to-orange-600">
         <div className="relative">
           <Logo dark onClick={() => setPage("home")} />
@@ -130,9 +119,7 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
         </p>
       </AuthPanel>
 
-      {/* ── RIGHT PANEL ── */}
       <div className="flex-1 bg-slate-50 flex flex-col overflow-y-auto">
-        {/* top bar */}
         <div className="flex justify-between items-center px-8 py-5 border-b border-slate-200 bg-white">
           <div className="lg:hidden"><Logo onClick={() => setPage("home")} /></div>
           <div className="hidden lg:block" />
@@ -144,7 +131,6 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
           </p>
         </div>
 
-        {/* form body */}
         <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full px-8 py-10">
           <div className="mb-6">
             <span className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full mb-3">
@@ -158,7 +144,6 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
 
           <Stepper steps={["Account Details", "Password"]} current={step} />
 
-          {/* ── STEP 0: ACCOUNT DETAILS ── */}
           {step === 0 && (
             <>
               <Input
@@ -186,10 +171,8 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
             </>
           )}
 
-          {/* ── STEP 1: PASSWORD ── */}
           {step === 1 && (
             <>
-              {/* account summary */}
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4 text-sm">
                 <p className="font-bold text-amber-800 mb-0.5">Account Summary</p>
                 <p className="text-amber-700">{name} · {company} · {country}</p>
@@ -224,7 +207,6 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
             </>
           )}
 
-          {/* NAVIGATION */}
           <div className="flex gap-3 mt-2">
             {step > 0 && (
               <Btn variant="ghost" onClick={() => setStep(s => s - 1)}>← Back</Btn>
@@ -238,7 +220,6 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
           </div>
         </div>
 
-        {/* bottom link */}
         <div className="text-center py-4 border-t border-slate-200 bg-white">
           <p className="text-sm text-slate-500">
             Looking for work?{" "}

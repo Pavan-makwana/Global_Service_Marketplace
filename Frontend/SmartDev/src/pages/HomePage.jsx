@@ -1,10 +1,5 @@
 import { Card, Btn, Logo } from "../components/ui";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Home / Landing
-// Route: "home"
-// Access: Public
-// ─────────────────────────────────────────────────────────────────
 
 const FEATURES = [
   { icon:"🎯", title:"AI Smart Matching",   desc:"Weighted algorithm scores on skills (40%), experience (20%), ratings (30%), on-time delivery (10%).", bg:"bg-blue-50"   },
@@ -37,7 +32,6 @@ export default function HomePage({ setPage }) {
           {/* Left: Logo */}
           <Logo />
 
-          {/* Right: Nav actions */}
           <div className="flex items-center gap-1">
             <button
               onClick={() => setPage("dev-login")}
@@ -52,7 +46,6 @@ export default function HomePage({ setPage }) {
               Client Login
             </button>
 
-            {/* Divider */}
             <div className="w-px h-5 bg-slate-200 mx-1" />
 
             <button
@@ -72,22 +65,17 @@ export default function HomePage({ setPage }) {
         </div>
       </nav>
 
-      {/* ── HERO ── */}
       <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 pt-20 pb-28 px-6 relative overflow-hidden">
-        {/* grid overlay */}
         <div className="absolute inset-0 opacity-10 pointer-events-none"
           style={{ backgroundImage:"linear-gradient(white 1px,transparent 1px),linear-gradient(90deg,white 1px,transparent 1px)", backgroundSize:"52px 52px" }} />
-        {/* glow blobs */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-sky-400 opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-400 opacity-10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
 
         <div className="max-w-5xl mx-auto text-center relative">
-          {/* pill badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-sky-200 text-xs font-semibold px-4 py-2 rounded-full mb-6 backdrop-blur-sm">
             🎯 Smart Matching Engine — Live
           </div>
 
-          {/* headline */}
           <h1 className="text-5xl md:text-6xl font-black text-white leading-tight mb-5 tracking-tight">
             Hire Global Tech Talent.<br />
             <span className="text-sky-300 italic">Matched by Intelligence.</span>
@@ -96,10 +84,8 @@ export default function HomePage({ setPage }) {
             Post a project, let AI find your best-fit developers — or join as a developer and get matched to the work you're built for.
           </p>
 
-          {/* DUAL CTA CARDS */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-2xl mx-auto mb-8">
 
-            {/* Developer CTA */}
             <div
               onClick={() => setPage("dev-register")}
               className="bg-white/10 border-2 border-white/20 rounded-2xl p-8 cursor-pointer
@@ -117,7 +103,6 @@ export default function HomePage({ setPage }) {
               </div>
             </div>
 
-            {/* Client CTA */}
             <div
               onClick={() => setPage("client-register")}
               className="bg-white/10 border-2 border-white/20 rounded-2xl p-8 cursor-pointer
@@ -145,7 +130,6 @@ export default function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* ── STATS STRIP ── */}
       <section className="bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 py-10 px-6 divide-x divide-slate-200">
           {[
@@ -162,7 +146,6 @@ export default function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ── */}
       <section className="py-20 px-6 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
@@ -172,7 +155,6 @@ export default function HomePage({ setPage }) {
             <h2 className="text-4xl font-black text-slate-800">From idea to hired in 3 steps</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            {/* connector line */}
             <div className="hidden md:block absolute top-14 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-blue-300 to-sky-300" />
             {STEPS.map((s, i) => (
               <Card key={i} className="p-8 text-center relative">
@@ -189,7 +171,6 @@ export default function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* ── FEATURES GRID ── */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
@@ -208,7 +189,6 @@ export default function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* ── MATCHING FORMULA ── */}
       <section className="py-20 px-6 bg-gradient-to-br from-blue-900 to-blue-800">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-4xl font-black text-white mb-3">AI Matching Formula</h2>
@@ -233,7 +213,6 @@ export default function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
       <section className="py-20 px-6 bg-slate-50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl font-black text-slate-800 text-center mb-12">Trusted worldwide</h2>
@@ -259,7 +238,6 @@ export default function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* ── FINAL CTA ── */}
       <section className="py-16 px-6 bg-white border-t border-slate-200 text-center">
         <h2 className="text-4xl font-black text-slate-800 mb-3">Ready to get started?</h2>
         <p className="text-slate-500 mb-8">Join 14,200+ professionals and 3,800+ clients already using SmartDev Marketplace.</p>
@@ -269,7 +247,6 @@ export default function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
       <footer className="bg-slate-800 py-8 px-6 text-center">
         <Logo dark />
         <p className="text-slate-500 text-sm mt-3">© 2025 SmartDev Marketplace · Spartan Tech Internal Platform · Frontend: Swastika</p>

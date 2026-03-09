@@ -1,14 +1,9 @@
-// ─────────────────────────────────────────────────────────────────
-// SmartDev Marketplace — Shared Constants & Mock Data
-// ─────────────────────────────────────────────────────────────────
 
-// Admin credentials (hardcoded as per BRD — replace with env vars in production)
 export const ADMIN_CREDENTIALS = {
   email: "admin@SmartDev Marketplace.com",
   password: "Admin@2025",
 };
 
-// ── SKILLS ─────────────────────────────────────────────────────────
 export const SKILLS_LIST = [
   "React", "Node.js", "Python", "Flutter", "Figma", "AWS",
   "Docker", "PostgreSQL", "Solidity", "TypeScript", "Vue.js",
@@ -16,14 +11,12 @@ export const SKILLS_LIST = [
   "Swift", "Kotlin", "Go", "Ruby on Rails",
 ];
 
-// ── COUNTRIES ──────────────────────────────────────────────────────
 export const COUNTRIES = [
   "India", "USA", "United Kingdom", "Germany", "UAE", "Japan",
   "Mexico", "Brazil", "Canada", "Australia", "Singapore",
   "Italy", "France", "Netherlands", "Sweden",
 ];
 
-// ── DEVELOPERS ─────────────────────────────────────────────────────
 export const DEVS = [
   {
     id: 1, name: "Aiko Tanaka", initials: "AT", country: "Japan",
@@ -81,7 +74,6 @@ export const DEVS = [
   },
 ];
 
-// ── PROJECTS ───────────────────────────────────────────────────────
 export const PROJECTS = [
   {
     id: 1, title: "E-Commerce Platform Rebuild",
@@ -151,7 +143,6 @@ export const PROJECTS = [
   },
 ];
 
-// ── ADMIN USER TABLE ───────────────────────────────────────────────
 export const ADMIN_USERS = [
   { id:1, name:"Aiko Tanaka",       email:"aiko@dev.com",    role:"Developer", status:"Active",   joined:"Jan 2024", earnings:"$28,450", projects:12 },
   { id:2, name:"Carlos Reyes",      email:"carlos@dev.mx",   role:"Developer", status:"Active",   joined:"Mar 2024", earnings:"$19,200", projects:8  },
@@ -162,7 +153,6 @@ export const ADMIN_USERS = [
   { id:7, name:"Mark Sullivan",     email:"mark@cm.ca",      role:"Client",    status:"Active",   joined:"Dec 2023", earnings:"—",        projects:3  },
 ];
 
-// ── CHART DATA ─────────────────────────────────────────────────────
 export const CHART_DEMAND = [
   { country:"USA", v:142 }, { country:"Germany", v:98 },
   { country:"India", v:87 }, { country:"UAE", v:74 },
@@ -185,6 +175,5 @@ export const CHART_SKILLS = [
 ];
 export const PIE_COLORS = ["#1E3A8A","#0EA5E9","#10B981","#F59E0B","#8B5CF6"];
 
-// ── URGENCY / STATUS BADGE VARIANTS ───────────────────────────────
 export const URGENCY_VARIANT = { High:"amber", Medium:"sky", Low:"green" };
 export const STATUS_VARIANT  = { Open:"green", "In Progress":"sky", Closed:"gray" };

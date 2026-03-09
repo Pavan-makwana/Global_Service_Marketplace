@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { PROJECTS } from "./constants/data";
 
-// ── Pages ────────────────────────────────────────────────────────
 import HomePage           from "./pages/HomePage";
 import DevRegisterPage    from "./pages/DevRegisterPage";
 import DevLoginPage       from "./pages/DevLoginPage";
@@ -15,17 +14,7 @@ import DevDashboard       from "./pages/DevDashboard";
 import ClientDashboard    from "./pages/ClientDashboard";
 import AdminDashboard     from "./pages/AdminDashboard";
 
-// ─────────────────────────────────────────────────────────────────
-// ROOT APP — Page Router
-//
-// Shared state:
-//   projects       — live project list (applicant counts update on apply)
-//   onApply(id)    — called by ProjectDetailPage when dev submits application
-//                    increments applicants count on the correct project,
-//                    which ClientDashboard and Marketplace both read from.
-//
-// ADMIN CREDENTIALS: admin@SmartDevMarketplace.com / Admin@2025
-// ─────────────────────────────────────────────────────────────────
+
 
 export default function App() {
   const [page, setPage]                       = useState("home");
@@ -33,14 +22,10 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedDev, setSelectedDev]         = useState(null);
 
-  // ── SHARED PROJECTS STATE ─────────────────────────────────────
-  // Initialised from mock data. When backend is ready, replace PROJECTS
-  // with an API fetch here and everything downstream updates automatically.
+ 
   const [projects, setProjects] = useState(PROJECTS);
 
-  // Called by ProjectDetailPage when a developer submits an application.
-  // Increments applicant count on the matching project so ClientDashboard
-  // and Marketplace both show the updated number immediately.
+
   const handleApply = (projectId) => {
     setProjects(prev =>
       prev.map(p =>
@@ -49,7 +34,7 @@ export default function App() {
           : p
       )
     );
-    // Also update selectedProject so the detail page reflects it instantly
+   
     setSelectedProject(prev =>
       prev?.id === projectId
         ? { ...prev, applicants: prev.applicants + 1 }
@@ -57,7 +42,6 @@ export default function App() {
     );
   };
 
-  // ── AUTH ──────────────────────────────────────────────────────
   const handleLogin = (r) => {
     setRole(r);
     if (r === "admin")       setPage("admin-dashboard");

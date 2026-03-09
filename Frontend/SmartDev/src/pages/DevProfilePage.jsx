@@ -2,12 +2,6 @@ import { useState } from "react";
 import { TopNav, Card, Badge, Chip, Btn, TabBar, Avatar, Stars, MatchRing } from "../components/ui";
 import { DEVS } from "../constants/data";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Developer Profile
-// Route: "dev-profile"
-// Access: All roles
-// ─────────────────────────────────────────────────────────────────
-
 const REVIEWS = [
   {
     client:"TechVentures GmbH", rating:5, date:"Jan 2025", project:"E-Commerce Platform",
@@ -27,7 +21,7 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
   const d = dev || DEVS[0];
   const [tab, setTab] = useState("about");
 
-  // AI score breakdown per BRD formula
+  // AI score breakdown
   const SCORE_BREAKDOWN = [
     { label:"Skill Match",      score: Math.round(d.match * 0.4),        max:40,  color:"#1E3A8A" },
     { label:"Client Rating",    score: Math.round((d.rating / 5) * 30),  max:30,  color:"#0EA5E9" },
@@ -47,10 +41,8 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
           ← Back to Marketplace
         </button>
 
-        {/* ── PROFILE HEADER ── */}
         <Card className="p-8 mb-6">
           <div className="flex gap-6 flex-wrap">
-            {/* Avatar + availability dot */}
             <div className="relative">
               <Avatar initials={d.initials} size="xl" color="blue" />
               <div
@@ -59,7 +51,6 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
               />
             </div>
 
-            {/* Name + bio */}
             <div className="flex-1 min-w-64">
               <div className="flex flex-wrap gap-2 items-center mb-1">
                 <h1 className="text-2xl font-black text-slate-800">{d.name}</h1>
@@ -82,7 +73,6 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
               </div>
             </div>
 
-            {/* Quick metrics */}
             <div className="grid grid-cols-2 gap-3 self-start flex-shrink-0">
               {[
                 { label:"Hourly Rate", val:`$${d.rate}/hr`, color:"text-blue-900"   },
@@ -99,10 +89,8 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
           </div>
         </Card>
 
-        {/* ── MAIN + SIDEBAR ── */}
         <div className="grid grid-cols-3 gap-6">
 
-          {/* Main content — 2/3 */}
           <div className="col-span-2">
             <TabBar
               tabs={[
@@ -114,7 +102,6 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
               onChange={setTab}
             />
 
-            {/* ABOUT */}
             {tab === "about" && (
               <Card className="p-7">
                 <h2 className="text-lg font-black text-slate-800 mb-3">Professional Summary</h2>
@@ -144,7 +131,6 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
               </Card>
             )}
 
-            {/* PORTFOLIO */}
             {tab === "portfolio" && (
               <div className="flex flex-col gap-3">
                 {(d.portfolio || ["Project Alpha","Project Beta","Project Gamma"]).map((title, i) => (
@@ -162,7 +148,6 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
               </div>
             )}
 
-            {/* REVIEWS */}
             {tab === "reviews" && (
               <Card className="p-7">
                 {REVIEWS.map((r, i) => (
@@ -184,10 +169,8 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
             )}
           </div>
 
-          {/* Sidebar — 1/3 */}
           <div className="flex flex-col gap-4">
 
-            {/* AI Match Score card */}
             <Card className="p-5">
               <p className="text-sm font-black text-slate-800 mb-4">AI Match Score</p>
               <div className="flex justify-center mb-5">
@@ -210,7 +193,6 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
               ))}
             </Card>
 
-            {/* Quick stats */}
             <Card className="p-5">
               <p className="text-sm font-black text-slate-800 mb-3">Quick Stats</p>
               {[
@@ -226,7 +208,6 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
               ))}
             </Card>
 
-            {/* Action buttons */}
             <Card className="p-5">
               <p className="text-sm font-black text-slate-800 mb-3">Actions</p>
               <div className="flex flex-col gap-2">

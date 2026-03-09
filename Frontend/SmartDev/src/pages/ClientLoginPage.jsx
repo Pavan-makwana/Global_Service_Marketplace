@@ -2,12 +2,7 @@ import { useState } from "react";
 import { Logo, Input, PasswordInput, Btn, Toast, Divider, AdminHint, AuthPanel, BenefitList } from "../components/ui";
 import { ADMIN_CREDENTIALS } from "../constants/data";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Client Login
-// Route: "client-login"
-// Access: Public
-// NOTE: Admin can also log in here using admin credentials.
-// ─────────────────────────────────────────────────────────────────
+
 
 export default function ClientLoginPage({ setPage, onLogin }) {
   const [email, setEmail]       = useState("");
@@ -17,7 +12,6 @@ export default function ClientLoginPage({ setPage, onLogin }) {
   const [toast, setToast]       = useState(null);
   const [remember, setRemember] = useState(false);
 
-  // ── SUBMIT ────────────────────────────────────────────────────
   const submit = () => {
     const e = {};
     if (!email) e.email = "Email is required";
@@ -29,14 +23,12 @@ export default function ClientLoginPage({ setPage, onLogin }) {
     setTimeout(() => {
       setLoading(false);
 
-      // Admin credential detection
       if (email === ADMIN_CREDENTIALS.email && pass === ADMIN_CREDENTIALS.password) {
         setToast({ msg: "Admin detected — redirecting to Admin Dashboard…", type: "success" });
         setTimeout(() => onLogin("admin"), 1300);
         return;
       }
 
-      // Regular client login
       setToast({ msg: "Signed in as Client!", type: "success" });
       setTimeout(() => onLogin("client"), 1000);
     }, 900);
@@ -46,7 +38,6 @@ export default function ClientLoginPage({ setPage, onLogin }) {
     <div className="min-h-screen flex">
       {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
 
-      {/* ── LEFT PANEL ── */}
       <AuthPanel gradient="bg-gradient-to-br from-amber-700 to-orange-600">
         <div className="relative">
           <Logo dark onClick={() => setPage("home")} />
@@ -72,7 +63,6 @@ export default function ClientLoginPage({ setPage, onLogin }) {
           />
         </div>
 
-        {/* Admin hint */}
         <div className="relative bg-white/10 border border-white/20 rounded-xl p-4 backdrop-blur-sm">
           <p className="text-xs font-bold text-amber-200 mb-1">🛡 Admin Access</p>
           <p className="text-amber-100 text-xs leading-relaxed">
@@ -84,9 +74,7 @@ export default function ClientLoginPage({ setPage, onLogin }) {
         </div>
       </AuthPanel>
 
-      {/* ── RIGHT PANEL ── */}
       <div className="flex-1 bg-slate-50 flex flex-col overflow-y-auto">
-        {/* top bar */}
         <div className="flex justify-between items-center px-8 py-5 border-b border-slate-200 bg-white">
           <div className="lg:hidden"><Logo onClick={() => setPage("home")} /></div>
           <div className="hidden lg:block" />
@@ -98,7 +86,6 @@ export default function ClientLoginPage({ setPage, onLogin }) {
           </p>
         </div>
 
-        {/* form body */}
         <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full px-8 py-10">
           <div className="mb-6">
             <span className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full mb-3">
@@ -108,7 +95,6 @@ export default function ClientLoginPage({ setPage, onLogin }) {
             <p className="text-slate-500 text-sm">Access your projects and developer matches.</p>
           </div>
 
-          {/* Fields */}
           <Input
             label="Work Email" type="email"
             placeholder="you@company.com"
@@ -116,7 +102,6 @@ export default function ClientLoginPage({ setPage, onLogin }) {
             icon="✉" error={errors.email} required
           />
 
-          {/* Password field (inline, themed amber) */}
           <div className="mb-4">
             <label className="block text-sm font-semibold text-slate-700 mb-1.5">
               Password <span className="text-red-500">*</span>
@@ -127,7 +112,6 @@ export default function ClientLoginPage({ setPage, onLogin }) {
             />
           </div>
 
-          {/* Remember + forgot */}
           <div className="flex justify-between items-center mb-5 -mt-2">
             <label className="flex items-center gap-2 text-sm text-slate-500 cursor-pointer">
               <input
@@ -142,7 +126,6 @@ export default function ClientLoginPage({ setPage, onLogin }) {
             </span>
           </div>
 
-          {/* Submit */}
           <button
             onClick={submit}
             disabled={loading}
@@ -152,11 +135,9 @@ export default function ClientLoginPage({ setPage, onLogin }) {
             {loading ? "Signing in…" : "Sign In →"}
           </button>
 
-          {/* Admin hint */}
           <AdminHint />
         </div>
 
-        {/* bottom link */}
         <div className="text-center py-4 border-t border-slate-200 bg-white">
           <p className="text-sm text-slate-500">
             Looking for work?{" "}

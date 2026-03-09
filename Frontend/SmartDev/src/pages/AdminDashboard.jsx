@@ -10,13 +10,7 @@ import {
   PIE_COLORS,
 } from "../constants/data";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Admin Dashboard
-// Route: "admin-dashboard"
-// Access: Admin only
-// ─────────────────────────────────────────────────────────────────
 
-// Shared chart tooltip
 const ChartTooltip = ({ active, payload, label }) =>
   active && payload?.length ? (
     <div className="bg-white border border-slate-200 rounded-xl px-4 py-2 shadow-lg text-sm">
@@ -39,7 +33,6 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
   return (
     <div className="min-h-screen bg-slate-50">
 
-      {/* ── ADMIN NAV (dark themed) ── */}
       <nav className="bg-slate-900 border-b border-slate-700 sticky top-0 z-50 shadow-lg">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -74,7 +67,6 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
 
       <div className="max-w-7xl mx-auto px-6 py-8">
 
-        {/* ══ OVERVIEW TAB ══ */}
         {tab === "overview" && (
           <>
             <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
@@ -88,7 +80,6 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
               </div>
             </div>
 
-            {/* KPI TILES */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               <StatTile label="Total Projects"    value="3,812"  sub="+8% vs last month"  icon="📋" topColor="bg-blue-900"   />
               <StatTile label="Active Developers" value="14,200" sub="+412 this month"     icon="👥" topColor="bg-sky-500"    />
@@ -96,10 +87,8 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
               <StatTile label="Avg Match Score"   value="87%"    sub="Across all projects" icon="🎯" topColor="bg-amber-500"  />
             </div>
 
-            {/* CHARTS ROW */}
             <div className="grid grid-cols-3 gap-6 mb-6">
 
-              {/* Main chart (2/3) */}
               <Card className="p-6 col-span-2">
                 <div className="flex justify-between items-center mb-5 flex-wrap gap-2">
                   <h3 className="font-black text-slate-800">Analytics</h3>
@@ -153,7 +142,6 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
                 )}
               </Card>
 
-              {/* Pie chart (1/3) */}
               <Card className="p-6">
                 <h3 className="font-black text-slate-800 mb-5">By Category</h3>
                 <ResponsiveContainer width="100%" height={160}>
@@ -178,7 +166,6 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
               </Card>
             </div>
 
-            {/* TOP DEVELOPERS */}
             <Card className="p-6">
               <h3 className="font-black text-slate-800 mb-4">Top Performing Developers</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -214,7 +201,6 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
           </>
         )}
 
-        {/* ══ ANALYTICS TAB ══ */}
         {tab === "analytics" && (
           <div>
             <h1 className="text-2xl font-black text-slate-800 mb-6">Platform Analytics</h1>
@@ -261,13 +247,11 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
           </div>
         )}
 
-        {/* ══ USERS TAB ══ */}
         {tab === "users" && (
           <Card className="overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center flex-wrap gap-3">
               <h3 className="font-black text-slate-800 text-lg">User Management</h3>
               <div className="flex gap-3 items-center flex-wrap">
-                {/* Role filter */}
                 <div className="flex gap-1 bg-slate-100 rounded-lg p-1">
                   {["all","developer","client"].map(r => (
                     <button key={r} onClick={() => setUserRole(r)}
@@ -330,7 +314,6 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
               </table>
             </div>
 
-            {/* Pagination */}
             <div className="px-6 py-4 border-t border-slate-100 flex justify-between items-center">
               <p className="text-sm text-slate-500">
                 Showing {filteredUsers.length} of {ADMIN_USERS.length} users
@@ -350,7 +333,6 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
           </Card>
         )}
 
-        {/* ══ SETTINGS TAB ══ */}
         {tab === "settings" && (
           <Card className="p-8 max-w-xl">
             <h2 className="text-xl font-black text-slate-800 mb-2">Matching Engine Configuration</h2>

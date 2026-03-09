@@ -2,35 +2,25 @@ import { useState } from "react";
 import { Logo, Input, Select, Textarea, PasswordInput, Stepper, Btn, PillLabel, AuthPanel, BenefitList } from "../components/ui";
 import { SKILLS_LIST, COUNTRIES } from "../constants/data";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Developer Registration (3-step)
-// Route: "dev-register"
-// Access: Public
-// ─────────────────────────────────────────────────────────────────
-
 export default function DevRegisterPage({ setPage, onLogin }) {
   const [step, setStep]           = useState(0);
   const [done, setDone]           = useState(false);
   const [errors, setErrors]       = useState({});
 
-  // Step 0 — Basic Info
   const [name, setName]           = useState("");
   const [email, setEmail]         = useState("");
   const [country, setCountry]     = useState("");
 
-  // Step 1 — Skills & Bio
   const [primary, setPrimary]     = useState("");
   const [exp, setExp]             = useState("");
   const [otherSkills, setOtherSkills] = useState("");
   const [bio, setBio]             = useState("");
   const [portfolio, setPortfolio] = useState("");
 
-  // Step 2 — Password & Terms
   const [pass, setPass]           = useState("");
   const [confirm, setConfirm]     = useState("");
   const [agree, setAgree]         = useState(false);
 
-  // ── VALIDATION ─────────────────────────────────────────────────
   const validate = () => {
     const e = {};
     if (step === 0) {
@@ -57,7 +47,6 @@ export default function DevRegisterPage({ setPage, onLogin }) {
     setDone(true);
   };
 
-  // ── SUCCESS SCREEN ─────────────────────────────────────────────
   if (done) return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-50 flex items-center justify-center p-6">
       <div className="text-center max-w-md w-full">
@@ -81,7 +70,6 @@ export default function DevRegisterPage({ setPage, onLogin }) {
   return (
     <div className="min-h-screen flex">
 
-      {/* ── LEFT PANEL ── */}
       <AuthPanel gradient="bg-gradient-to-br from-blue-900 to-blue-800">
         <div className="relative">
           <Logo dark onClick={() => setPage("home")} />
@@ -108,9 +96,7 @@ export default function DevRegisterPage({ setPage, onLogin }) {
         </p>
       </AuthPanel>
 
-      {/* ── RIGHT PANEL ── */}
       <div className="flex-1 bg-slate-50 flex flex-col overflow-y-auto">
-        {/* top bar */}
         <div className="flex justify-between items-center px-8 py-5 border-b border-slate-200 bg-white">
           <div className="lg:hidden"><Logo onClick={() => setPage("home")} /></div>
           <div className="hidden lg:block" />
@@ -122,7 +108,6 @@ export default function DevRegisterPage({ setPage, onLogin }) {
           </p>
         </div>
 
-        {/* form body */}
         <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full px-8 py-10">
           <div className="mb-6">
             <PillLabel color="blue">💻 DEVELOPER REGISTRATION</PillLabel>
@@ -131,7 +116,6 @@ export default function DevRegisterPage({ setPage, onLogin }) {
 
           <Stepper steps={["Basic Info", "Skills", "Security"]} current={step} />
 
-          {/* ── STEP 0: BASIC INFO ── */}
           {step === 0 && (
             <>
               <Input
@@ -152,7 +136,6 @@ export default function DevRegisterPage({ setPage, onLogin }) {
             </>
           )}
 
-          {/* ── STEP 1: SKILLS & BIO ── */}
           {step === 1 && (
             <>
               <Select
@@ -193,10 +176,8 @@ export default function DevRegisterPage({ setPage, onLogin }) {
             </>
           )}
 
-          {/* ── STEP 2: SECURITY ── */}
           {step === 2 && (
             <>
-              {/* summary box */}
               <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-4 text-sm">
                 <p className="font-bold text-blue-900 mb-0.5">Account Summary</p>
                 <p className="text-blue-700">{name} · {primary || "—"} · {exp || "—"} · {country}</p>
@@ -229,7 +210,6 @@ export default function DevRegisterPage({ setPage, onLogin }) {
             </>
           )}
 
-          {/* NAVIGATION BUTTONS */}
           <div className="flex gap-3 mt-2">
             {step > 0 && (
               <Btn variant="ghost" onClick={() => setStep(s => s - 1)}>← Back</Btn>
@@ -240,7 +220,6 @@ export default function DevRegisterPage({ setPage, onLogin }) {
           </div>
         </div>
 
-        {/* bottom link */}
         <div className="text-center py-4 border-t border-slate-200 bg-white">
           <p className="text-sm text-slate-500">
             Looking to hire instead?{" "}

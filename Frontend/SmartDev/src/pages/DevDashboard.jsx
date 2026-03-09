@@ -2,13 +2,7 @@ import { useState } from "react";
 import { TopNav, Card, StatTile, Badge, Chip, Btn, TabBar, Avatar, Stars } from "../components/ui";
 import { DEVS } from "../constants/data";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Developer Dashboard
-// Route: "dev-dashboard"
-// Access: Developer only
-// ─────────────────────────────────────────────────────────────────
 
-// Simulated applications with statuses
 const APP_STATUSES = ["Applied", "Shortlisted", "Applied", "Rejected"];
 const APP_BADGE = {
   Applied:    "sky",
@@ -18,7 +12,7 @@ const APP_BADGE = {
 };
 
 export default function DevDashboard({ setPage, setSelectedProject, onLogout, projects = [] }) {
-  const dev = DEVS[0]; // logged-in developer (mock)
+  const dev = DEVS[0]; 
   const [tab, setTab] = useState("applications");
   const [isAvailable, setIsAvailable] = useState(dev.avail);
 
@@ -42,7 +36,6 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
     <div className="min-h-screen bg-slate-50">
       <TopNav setPage={setPage} role="developer" onLogout={onLogout || (() => setPage("home"))} />
 
-      {/* HERO BANNER */}
       <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-10 px-6">
         <div className="max-w-7xl mx-auto flex items-center gap-5 flex-wrap">
           <div className="relative">
@@ -67,7 +60,6 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
 
       <div className="max-w-7xl mx-auto px-6 py-8">
 
-        {/* KPI TILES */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <StatTile label="Applications Sent"  value="14"                              sub="3 shortlisted"     icon="📤" topColor="bg-blue-900"   />
           <StatTile label="Projects Completed" value={`${dev.reviews}`}                sub="+8 this month"     icon="✅" topColor="bg-emerald-500"/>
@@ -75,7 +67,6 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
           <StatTile label="My Rating"           value={`${dev.rating}★`}               sub={`${dev.reviews} reviews`} icon="🏅" topColor="bg-sky-500"/>
         </div>
 
-        {/* TABS */}
         <TabBar
           tabs={[
             { id:"applications", label:"My Applications" },
@@ -89,10 +80,8 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
           }}
         />
 
-        {/* ── APPLICATIONS TAB ── */}
         {tab === "applications" && (
           <div>
-            {/* Status legend */}
             <div className="flex gap-3 mb-4 flex-wrap">
               {[["Applied","sky"],["Shortlisted","green"],["Rejected","red"],["Awarded","blue"]].map(([s,v]) => (
                 <Badge key={s} variant={v}>{s}</Badge>
@@ -138,14 +127,12 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
           </div>
         )}
 
-        {/* ── PROFILE EDIT TAB ── */}
         {tab === "profile" && (
           <div className="max-w-xl">
             <Card className="p-8">
               <h2 className="text-xl font-black text-slate-800 mb-1">Edit Developer Profile</h2>
               <p className="text-slate-500 text-sm mb-5">Your profile is visible to clients on the marketplace</p>
 
-              {/* Name (read-only) */}
               <div className="mb-4">
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Full Name</label>
                 <input
@@ -155,7 +142,6 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
                 <p className="text-xs text-slate-400 mt-1">Contact support to change your name.</p>
               </div>
 
-              {/* Primary skill */}
               <div className="mb-4">
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Primary Skill</label>
                 <input
@@ -164,7 +150,6 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
                 />
               </div>
 
-              {/* Hourly rate */}
               <div className="mb-4">
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Hourly Rate (USD)</label>
                 <div className="relative">
@@ -177,7 +162,6 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
                 </div>
               </div>
 
-              {/* Bio */}
               <div className="mb-4">
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Short Bio</label>
                 <textarea
@@ -188,7 +172,6 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
                 />
               </div>
 
-              {/* Portfolio URL */}
               <div className="mb-6">
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Portfolio / GitHub URL</label>
                 <div className="relative">
@@ -211,7 +194,6 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
               </div>
             </Card>
 
-            {/* Availability toggle */}
             <Card className="p-5 mt-4 flex justify-between items-center">
               <div>
                 <p className="font-bold text-slate-800">Availability Status</p>

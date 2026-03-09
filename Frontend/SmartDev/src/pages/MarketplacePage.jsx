@@ -2,11 +2,6 @@ import { useState } from "react";
 import { TopNav, Card, Badge, Chip, Btn } from "../components/ui";
 import { URGENCY_VARIANT, STATUS_VARIANT } from "../constants/data";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Marketplace — Browse & Filter Projects
-// Route: "marketplace"
-// Access: Developer (logged in), Public (view only)
-// ─────────────────────────────────────────────────────────────────
 
 const CATEGORIES = ["All", "Engineering", "Design", "AI & Data", "Marketing", "Web3"];
 
@@ -16,7 +11,6 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
   const [urgency, setUrgency]   = useState("All");
   const [sortBy, setSortBy]     = useState("newest");
 
-  // ── FILTER + SORT ─────────────────────────────────────────────
   const filtered = PROJECTS.filter(p => {
     const q = search.toLowerCase();
     const matchSearch = !q
@@ -29,7 +23,7 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
   }).sort((a, b) => {
     if (sortBy === "budget")  return b.budgetMax - a.budgetMax;
     if (sortBy === "apps")    return b.applicants - a.applicants;
-    return new Date(b.posted) - new Date(a.posted); // newest
+    return new Date(b.posted) - new Date(a.posted); 
   });
 
   const openDetail = (p) => { setSelectedProject(p); setPage("project-detail"); };
@@ -38,7 +32,6 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
     <div className="min-h-screen bg-slate-50">
       <TopNav setPage={setPage} role={role} onLogout={role ? (onLogout || (() => setPage("home"))) : null} />
 
-      {/* HEADER */}
       <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-10 px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl font-black text-white mb-1">Browse Projects</h1>
@@ -50,11 +43,9 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
 
       <div className="max-w-7xl mx-auto px-6 py-8">
 
-        {/* ── FILTER BAR ── */}
         <Card className="p-5 mb-6">
           <div className="flex flex-wrap gap-3 items-end">
 
-            {/* Search */}
             <div className="flex-1 min-w-64">
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">Search</label>
               <div className="relative">
@@ -68,7 +59,6 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
               </div>
             </div>
 
-            {/* Urgency */}
             <div className="min-w-36">
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">Urgency</label>
               <select
@@ -80,7 +70,6 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
               </select>
             </div>
 
-            {/* Sort */}
             <div className="min-w-40">
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">Sort By</label>
               <select
@@ -95,7 +84,6 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
             </div>
           </div>
 
-          {/* Category pills */}
           <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100">
             {CATEGORIES.map(c => (
               <button
@@ -112,7 +100,6 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
           </div>
         </Card>
 
-        {/* Result count + AI badge */}
         <div className="flex justify-between items-center mb-4">
           <p className="text-sm text-slate-500">
             <strong className="text-slate-800">{filtered.length}</strong> project{filtered.length !== 1 ? "s" : ""} found
@@ -120,7 +107,6 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
           <Badge variant="blue">◈ AI Match Active</Badge>
         </div>
 
-        {/* ── PROJECT CARDS ── */}
         <div className="flex flex-col gap-4">
           {filtered.map(p => {
             const urgVariant = URGENCY_VARIANT[p.urgency] || "gray";
@@ -128,7 +114,6 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
             return (
               <Card key={p.id} onClick={() => openDetail(p)} className="overflow-hidden">
                 <div className="flex">
-                  {/* urgency accent bar */}
                   <div
                     className={`w-1.5 flex-shrink-0
                       ${p.urgency === "High"   ? "bg-amber-400"
@@ -138,7 +123,6 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
                   <div className="flex-1 p-6">
                     <div className="flex justify-between flex-wrap gap-4">
 
-                      {/* LEFT: info */}
                       <div className="flex-1 min-w-60">
                         <div className="flex flex-wrap gap-2 mb-2">
                           <Badge variant={statVariant}>{p.status}</Badge>
@@ -156,7 +140,6 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
                         </div>
                       </div>
 
-                      {/* RIGHT: budget + CTA */}
                       <div className="text-right flex-shrink-0">
                         <p className="text-xl font-black text-blue-900">
                           ${p.budgetMin.toLocaleString()}–${p.budgetMax.toLocaleString()}
@@ -180,7 +163,6 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
             );
           })}
 
-          {/* Empty state */}
           {!filtered.length && (
             <div className="text-center py-24 text-slate-400">
               <div className="text-5xl mb-3">🔍</div>

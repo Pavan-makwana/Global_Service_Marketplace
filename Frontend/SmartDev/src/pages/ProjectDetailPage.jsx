@@ -2,11 +2,6 @@ import { useState } from "react";
 import { TopNav, Card, Badge, Chip, Btn, TabBar, Avatar, Stars, MatchRing, Textarea, Input } from "../components/ui";
 import { DEVS, PROJECTS, URGENCY_VARIANT, STATUS_VARIANT } from "../constants/data";
 
-// ─────────────────────────────────────────────────────────────────
-// PAGE: Project Detail
-// Route: "project-detail"
-// Access: All roles (developer can Apply, client sees applicants)
-// ─────────────────────────────────────────────────────────────────
 
 const TIMELINE_STEPS = [
   "Requirements Finalised",
@@ -15,7 +10,7 @@ const TIMELINE_STEPS = [
   "Development Sprint 2",
   "Testing & QA",
   "Client Review",
-  "Launch & Handover",
+  "Launch & Handover",W
 ];
 
 const AVATAR_COLORS = ["blue","sky","green","amber","purple","pink"];
@@ -29,7 +24,6 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
   const [proposalRate, setProposalRate] = useState("");
   const [applied, setApplied]       = useState(false);
 
-  // Recommended = devs whose skills overlap with project
   const recommended = DEVS
     .filter(d => d.skills.some(s => p.skills.includes(s)))
     .sort((a, b) => b.match - a.match)
@@ -60,7 +54,6 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
           ← Back
         </button>
 
-        {/* ── PROJECT HEADER CARD ── */}
         <Card className="p-8 mb-6">
           <div className="flex justify-between flex-wrap gap-5">
             <div className="flex-1 min-w-64">
@@ -93,14 +86,11 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
           </div>
         </Card>
 
-        {/* ── TABS ── */}
         <TabBar tabs={TABS} active={tab} onChange={setTab} />
 
-        {/* ── CONTENT + SIDEBAR ── */}
         <div className={`grid gap-6 ${tab === "recommended" || tab === "applicants" ? "grid-cols-1" : "grid-cols-3"}`}>
           <div className={tab === "recommended" || tab === "applicants" ? "" : "col-span-2"}>
 
-            {/* ── OVERVIEW TAB ── */}
             {tab === "overview" && (
               <Card className="p-8">
                 <h2 className="text-xl font-black text-slate-800 mb-4">Project Description</h2>
@@ -124,7 +114,6 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
               </Card>
             )}
 
-            {/* ── RECOMMENDED TAB ── */}
             {tab === "recommended" && (
               <div>
                 <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-5 flex items-start gap-3">
@@ -193,7 +182,6 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
               </div>
             )}
 
-            {/* ── APPLICANTS TAB ── */}
             {tab === "applicants" && (
               <div className="flex flex-col gap-4">
                 {DEVS.slice(0, Math.min(p.applicants, 4)).length === 0 ? (
@@ -235,7 +223,6 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
               </div>
             )}
 
-            {/* ── TIMELINE TAB ── */}
             {tab === "timeline" && (
               <Card className="p-8">
                 <h2 className="text-xl font-black text-slate-800 mb-6">Project Timeline</h2>
@@ -267,7 +254,6 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
               </Card>
             )}
 
-            {/* ── APPLY TAB ── */}
             {tab === "apply" && !applied && (
               <Card className="p-8">
                 <h2 className="text-xl font-black text-slate-800 mb-1">Submit Your Application</h2>
@@ -307,11 +293,9 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
             )}
           </div>
 
-          {/* ── SIDEBAR (shown on non-full-width tabs) ── */}
           {tab !== "recommended" && tab !== "applicants" && (
             <div className="flex flex-col gap-4">
 
-              {/* Client info */}
               <Card className="p-5">
                 <h3 className="font-black text-slate-800 text-sm mb-4">About the Client</h3>
                 <div className="flex items-center gap-3 mb-4">
@@ -334,7 +318,6 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
                 ))}
               </Card>
 
-              {/* Developer match score (if dev is viewing) */}
               {role === "developer" && (
                 <Card className="p-5 bg-blue-50 border-blue-100">
                   <p className="text-xs font-bold text-blue-700 mb-3">🎯 YOUR MATCH SCORE</p>
