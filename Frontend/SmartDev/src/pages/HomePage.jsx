@@ -65,7 +65,7 @@ export default function HomePage({ setPage }) {
         </div>
       </nav>
 
-      <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 pt-20 pb-28 px-6 relative overflow-hidden">
+      <section className="bg-linear-to-br from-blue-900 via-blue-800 to-blue-900 pt-20 pb-28 px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none"
           style={{ backgroundImage:"linear-gradient(white 1px,transparent 1px),linear-gradient(90deg,white 1px,transparent 1px)", backgroundSize:"52px 52px" }} />
         <div className="absolute top-0 right-0 w-96 h-96 bg-sky-400 opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
@@ -123,7 +123,7 @@ export default function HomePage({ setPage }) {
 
           <p className="text-blue-300 text-sm">
             Already have an account?{" "}
-            <span onClick={() => setPage("dev-login")} className="text-sky-300 font-semibold cursor-pointer underline">
+            <span onClick={() => setPage("client-login")} className="text-sky-300 font-semibold cursor-pointer underline">
               Sign in
             </span>
           </p>
@@ -146,7 +146,7 @@ export default function HomePage({ setPage }) {
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-gradient-to-br from-blue-50 to-sky-50">
+      <section className="py-20 px-6 bg-linear-to-br from-blue-50 to-sky-50">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <span className="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-4 py-1.5 rounded-full tracking-widest uppercase mb-4">
@@ -155,10 +155,10 @@ export default function HomePage({ setPage }) {
             <h2 className="text-4xl font-black text-slate-800">From idea to hired in 3 steps</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            <div className="hidden md:block absolute top-14 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-blue-300 to-sky-300" />
+            <div className="hidden md:block absolute top-14 left-1/4 right-1/4 h-0.5 bg-linear-to-r from-blue-300 to-sky-300" />
             {STEPS.map((s, i) => (
               <Card key={i} className="p-8 text-center relative">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-900 to-sky-500 flex items-center justify-center text-white font-black text-xl mx-auto mb-4 shadow-lg">
+                <div className="w-14 h-14 rounded-full bg-linear-to-br from-blue-900 to-sky-500 flex items-center justify-center text-white font-black text-xl mx-auto mb-4 shadow-lg">
                   {s.n}
                 </div>
                 <div className="text-3xl mb-3">{s.icon}</div>
@@ -189,7 +189,7 @@ export default function HomePage({ setPage }) {
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-gradient-to-br from-blue-900 to-blue-800">
+      <section className="py-20 px-6 bg-linear-to-br from-blue-900 to-blue-800">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-4xl font-black text-white mb-3">AI Matching Formula</h2>
           <p className="text-blue-300 mb-10">Transparent, weighted scoring — every recommendation is explainable</p>

@@ -6,7 +6,7 @@ export const Logo = ({ onClick, dark = false }) => (
     onClick={onClick}
     className={`flex items-center gap-2.5 select-none ${onClick ? "cursor-pointer" : ""}`}
   >
-    <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-gradient-to-br from-blue-600 to-sky-400 shadow-md flex-shrink-0">
+    <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-linear-to-br from-blue-600 to-sky-400 shadow-md shrink-0">
       <span className="text-white font-black text-lg leading-none">SD</span>
     </div>
     <span className={`font-black text-xl tracking-tight leading-none ${dark ? "text-white" : "text-blue-900"}`}>
@@ -32,7 +32,7 @@ export const Avatar = ({ initials, size = "md", color = "blue" }) => {
     pink:   "bg-pink-100 text-pink-800",
   }[color] || "bg-blue-100 text-blue-800";
   return (
-    <div className={`${sz} ${bg} rounded-full flex items-center justify-center font-black flex-shrink-0`}>
+    <div className={`${sz} ${bg} rounded-full flex items-center justify-center font-black shrink-0`}>
       {initials}
     </div>
   );
@@ -306,7 +306,7 @@ export const MatchRing = ({ score, size = 56 }) => {
   const offset = c - (score / 100) * c;
   const color = score >= 90 ? "#10B981" : score >= 75 ? "#0EA5E9" : "#F59E0B";
   return (
-    <div className="relative flex-shrink-0" style={{ width: size, height: size }}>
+    <div className="relative shrink-0" style={{ width: size, height: size }}>
       <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
         <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e2e8f0" strokeWidth={4} />
         <circle
@@ -329,7 +329,7 @@ export const Stepper = ({ steps, current }) => (
     {steps.map((s, i) => (
       <div key={i} className="flex items-center gap-2 flex-1">
         <div
-          className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0
+          className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0
             ${i < current ? "bg-emerald-500 text-white" : i === current ? "bg-blue-900 text-white" : "bg-slate-200 text-slate-500"}`}
         >
           {i < current ? "✓" : i + 1}
@@ -366,7 +366,7 @@ export const TabBar = ({ tabs, active, onChange }) => (
 // TOAST NOTIFICATION 
 export const Toast = ({ msg, type, onClose }) => (
   <div
-    className={`fixed top-5 right-5 z-[9999] flex items-center gap-3 px-5 py-3 rounded-xl shadow-xl border
+    className={`fixed top-5 right-5 z-9999 flex items-center gap-3 px-5 py-3 rounded-xl shadow-xl border
       text-sm font-semibold
       ${type === "success"
         ? "bg-emerald-50 border-emerald-200 text-emerald-800"
@@ -444,7 +444,7 @@ export const BenefitList = ({ items, textColor = "text-blue-100", checkColor = "
   <div className="flex flex-col gap-3">
     {items.map(b => (
       <div key={b} className="flex items-center gap-3">
-        <div className="w-5 h-5 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0">
+        <div className="w-5 h-5 rounded-full bg-white/15 flex items-center justify-center shrink-0">
           <span className={`text-xs font-black ${checkColor}`}>✓</span>
         </div>
         <span className={`text-sm ${textColor}`}>{b}</span>

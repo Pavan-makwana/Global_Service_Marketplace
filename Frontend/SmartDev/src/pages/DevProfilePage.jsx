@@ -35,10 +35,14 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
 
       <div className="max-w-5xl mx-auto px-6 py-8">
         <button
-          onClick={() => setPage("marketplace")}
+          onClick={() => setPage(
+            role === "client" ? "client-dashboard" 
+            : role === "developer" ? "marketplace" 
+            : "marketplace"
+          )}
           className="flex items-center gap-2 text-sm text-sky-600 font-semibold mb-5 hover:gap-3 transition-all"
         >
-          ← Back to Marketplace
+          ← Back to {role === "client" ? "Dashboard" : "Marketplace"}
         </button>
 
         <Card className="p-8 mb-6">
@@ -73,7 +77,7 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 self-start flex-shrink-0">
+            <div className="grid grid-cols-2 gap-3 self-start shrink-0">
               {[
                 { label:"Hourly Rate", val:`$${d.rate}/hr`, color:"text-blue-900"   },
                 { label:"Jobs Done",   val:`${d.reviews}`,  color:"text-slate-800"  },
@@ -121,7 +125,7 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
                       </div>
                       <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-blue-900 to-sky-500 rounded-full transition-all"
+                          className="h-full bg-linear-to-r from-blue-900 to-sky-500 rounded-full transition-all"
                           style={{ width:`${pct}%` }}
                         />
                       </div>

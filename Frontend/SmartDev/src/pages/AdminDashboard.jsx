@@ -21,7 +21,7 @@ const ChartTooltip = ({ active, payload, label }) =>
     </div>
   ) : null;
 
-export default function AdminDashboard({ setPage, setSelectedDev }) {
+export default function AdminDashboard({ setPage, setSelectedDev, onLogout }) {
   const [tab, setTab]         = useState("overview");
   const [userRole, setUserRole] = useState("all");
   const [chartTab, setChartTab] = useState("demand");
@@ -36,7 +36,7 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
       <nav className="bg-slate-900 border-b border-slate-700 sticky top-0 z-50 shadow-lg">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-sky-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-blue-600 to-sky-400 flex items-center justify-center">
               <span className="text-white font-black text-sm leading-none">SD</span>
             </div>
             <span className="text-white font-black text-lg">SmartDev Marketplace</span>
@@ -56,7 +56,7 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
               </button>
             ))}
             <button
-              onClick={() => setPage("home")}
+              onClick={onLogout || (() => setPage("home"))}
               className="ml-3 px-3 py-1.5 rounded-lg text-sm bg-slate-700 text-slate-300 hover:text-white transition-colors"
             >
               Sign Out
@@ -182,7 +182,7 @@ export default function AdminDashboard({ setPage, setSelectedDev }) {
                         <p className="font-bold text-slate-800 text-sm truncate">{dev.name}</p>
                         <p className="text-slate-500 text-xs truncate">{dev.title}</p>
                       </div>
-                      <div className="flex-shrink-0">
+                      <div className="shrink-0">
                         <span className="text-xs font-black text-emerald-600">{dev.match}%</span>
                       </div>
                     </div>

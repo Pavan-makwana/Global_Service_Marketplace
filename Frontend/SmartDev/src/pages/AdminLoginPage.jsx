@@ -28,7 +28,7 @@ export default function AdminLoginPage({ setPage, onLogin }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
 
         <div className="text-center mb-8">
@@ -36,7 +36,7 @@ export default function AdminLoginPage({ setPage, onLogin }) {
             onClick={() => setPage("home")}
             className="cursor-pointer inline-block mb-4"
           >
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-sky-400 rounded-2xl flex items-center justify-center mx-auto shadow-2xl">
+            <div className="w-16 h-16 bg-linear-to-br from-blue-600 to-sky-400 rounded-2xl flex items-center justify-center mx-auto shadow-2xl">
               <span className="text-white font-black text-2xl leading-none">N</span>
             </div>
           </div>
@@ -47,7 +47,7 @@ export default function AdminLoginPage({ setPage, onLogin }) {
         <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
 
           <div className="flex items-center gap-3 bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 mb-6">
-            <span className="text-amber-400 text-xl flex-shrink-0">⚙️</span>
+            <span className="text-amber-400 text-xl shrink-0">⚙️</span>
             <div>
               <p className="text-amber-300 text-xs font-bold uppercase tracking-widest mb-0.5">Admin Credentials</p>
               <p className="text-amber-200 text-xs font-mono">admin@SmartDev Marketplace.com · Admin@2025</p>
@@ -110,7 +110,7 @@ export default function AdminLoginPage({ setPage, onLogin }) {
             className={`w-full py-3 rounded-xl font-bold text-white text-sm transition-all shadow-lg
               ${loading
                 ? "bg-blue-700 cursor-not-allowed opacity-70"
-                : "bg-gradient-to-r from-blue-700 to-sky-600 hover:opacity-90 shadow-blue-900/30"
+                : "bg-linear-to-r from-blue-700 to-sky-600 hover:opacity-90 shadow-blue-900/30"
               }`}
           >
             {loading ? "Authenticating…" : "Access Admin Dashboard →"}

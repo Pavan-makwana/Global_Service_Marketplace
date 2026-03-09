@@ -38,7 +38,7 @@ export default function DevLoginPage({ setPage, onLogin }) {
     <div className="min-h-screen flex">
       {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
 
-      <AuthPanel gradient="bg-gradient-to-br from-blue-900 to-blue-800">
+      <AuthPanel gradient="bg-linear-to-br from-blue-900 to-blue-800">
         <div className="relative">
           <Logo dark onClick={() => setPage("home")} />
         </div>
@@ -125,6 +125,15 @@ export default function DevLoginPage({ setPage, onLogin }) {
           <AdminHint />
         </div>
 
+          <div className="text-center py-3">
+            <span
+              onClick={() => setPage("home")}
+              className="text-sm text-slate-400 cursor-pointer hover:text-slate-600 transition-colors"
+            >
+              ← Back to Home
+            </span>
+          </div>
+          
         <div className="text-center py-4 border-t border-slate-200 bg-white">
           <p className="text-sm text-slate-500">
             Hiring talent?{" "}

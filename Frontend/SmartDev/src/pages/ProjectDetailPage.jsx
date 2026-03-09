@@ -15,7 +15,7 @@ const TIMELINE_STEPS = [
 
 const AVATAR_COLORS = ["blue","sky","green","amber","purple","pink"];
 
-export default function ProjectDetailPage({ project, setPage, role, setSelectedDev, onApply }) {
+export default function ProjectDetailPage({ project, setPage, role, setSelectedDev, onApply, onLogout }) {
   const p = project || PROJECTS[0];
 
   const [tab, setTab]               = useState("overview");
@@ -32,7 +32,7 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
   const urgVariant = URGENCY_VARIANT[p.urgency] || "gray";
   const statVariant = STATUS_VARIANT[p.status] || "gray";
 
-  const backRoute = role === "client" ? "client-dashboard" : role === "developer" ? "marketplace" : "marketplace";
+  const backRoute = role === "client" ? "client-dashboard" : "marketplace";
 
   const TABS = [
     { id:"overview",     label:"Overview" },
@@ -44,14 +44,14 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <TopNav setPage={setPage} role={role} onLogout={() => setPage("home")} />
+      <TopNav setPage={setPage} role={role} onLogout={onLogout || (() => setPage("home"))} />
 
       <div className="max-w-6xl mx-auto px-6 py-8">
         <button
           onClick={() => setPage(backRoute)}
           className="flex items-center gap-2 text-sm text-sky-600 font-semibold mb-5 hover:gap-3 transition-all"
         >
-          ← Back
+          ← Back to {role === "client" ? "Dashboard" : "Marketplace"}
         </button>
 
         <Card className="p-8 mb-6">
@@ -70,7 +70,7 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
                 {new Date(p.posted).toLocaleDateString("en", { year:"numeric", month:"long", day:"numeric" })}
               </p>
             </div>
-            <div className="text-right flex-shrink-0">
+            <div className="text-right shrink-0">
               <p className="text-2xl font-black text-blue-900">
                 ${p.budgetMin.toLocaleString()}–${p.budgetMax.toLocaleString()}
               </p>
@@ -117,7 +117,7 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
             {tab === "recommended" && (
               <div>
                 <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-5 flex items-start gap-3">
-                  <span className="text-xl flex-shrink-0">🎯</span>
+                  <span className="text-xl shrink-0">🎯</span>
                   <p className="text-blue-800 text-sm font-semibold">
                     AI engine ranked these developers based on skill overlap with{" "}
                     <strong>{p.skills.slice(0, 2).join(", ")}</strong>
@@ -153,7 +153,7 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
                               </div>
                               <Stars rating={dev.rating} />
                             </div>
-                            <div className="flex items-center gap-4 flex-shrink-0">
+                            <div className="flex items-center gap-4 shrink-0">
                               <div className="text-right">
                                 <p className="font-black text-blue-900 text-base">${dev.rate}/hr</p>
                                 <p className="text-xs text-slate-400">On-time: {dev.onTime}%</p>
@@ -208,7 +208,7 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
                           {" "}· ${dev.rate}/hr
                         </p>
                       </div>
-                      <div className="flex items-center gap-3 flex-shrink-0">
+                      <div className="flex items-center gap-3 shrink-0">
                         <MatchRing score={dev.match} size={52} />
                         {role === "client" && (
                           <div className="flex flex-col gap-1.5">
@@ -230,7 +230,7 @@ export default function ProjectDetailPage({ project, setPage, role, setSelectedD
                   <div key={i} className="flex gap-4">
                     <div className="flex flex-col items-center">
                       <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0
+                        className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0
                           ${i < 2 ? "bg-emerald-500 text-white"
                           : i === 2 ? "bg-blue-900 text-white"
                           : "bg-slate-100 text-slate-400 border-2 border-slate-200"}`}

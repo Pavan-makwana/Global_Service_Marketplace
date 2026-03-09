@@ -48,7 +48,7 @@ export default function DevRegisterPage({ setPage, onLogin }) {
   };
 
   if (done) return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-50 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-sky-50 flex items-center justify-center p-6">
       <div className="text-center max-w-md w-full">
         <div className="w-20 h-20 bg-emerald-500 rounded-full flex items-center justify-center text-white text-4xl mx-auto mb-6 shadow-xl">
           ✓
@@ -70,7 +70,7 @@ export default function DevRegisterPage({ setPage, onLogin }) {
   return (
     <div className="min-h-screen flex">
 
-      <AuthPanel gradient="bg-gradient-to-br from-blue-900 to-blue-800">
+      <AuthPanel gradient="bg-linear-to-br from-blue-900 to-blue-800">
         <div className="relative">
           <Logo dark onClick={() => setPage("home")} />
         </div>
@@ -220,6 +220,16 @@ export default function DevRegisterPage({ setPage, onLogin }) {
           </div>
         </div>
 
+
+        <div className="text-center py-3">
+          <span
+            onClick={() => setPage("home")}
+            className="text-sm text-slate-400 cursor-pointer hover:text-slate-600 transition-colors"
+          >
+            ← Back to Home
+          </span>
+        </div>
+        
         <div className="text-center py-4 border-t border-slate-200 bg-white">
           <p className="text-sm text-slate-500">
             Looking to hire instead?{" "}

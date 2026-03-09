@@ -11,7 +11,7 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
   const [urgency, setUrgency]   = useState("All");
   const [sortBy, setSortBy]     = useState("newest");
 
-  const filtered = PROJECTS.filter(p => {
+  const filtered = projects.filter(p => {
     const q = search.toLowerCase();
     const matchSearch = !q
       || p.title.toLowerCase().includes(q)
@@ -32,14 +32,24 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
     <div className="min-h-screen bg-slate-50">
       <TopNav setPage={setPage} role={role} onLogout={role ? (onLogout || (() => setPage("home"))) : null} />
 
-      <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-10 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-black text-white mb-1">Browse Projects</h1>
-          <p className="text-blue-300 text-sm">
-            Discover global opportunities · {projects.length} live projects
-          </p>
-        </div>
-      </div>
+    <div className="bg-linear-to-r from-blue-900 to-blue-800 py-10 px-6">
+  <div className="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-4">
+    <div>
+      <h1 className="text-3xl font-black text-white mb-1">Browse Projects</h1>
+      <p className="text-blue-300 text-sm">
+        Discover global opportunities · {projects.length} live projects
+      </p>
+    </div>
+    {role && (
+      <button
+        onClick={() => setPage(role === "client" ? "client-dashboard" : "dev-dashboard")}
+        className="px-5 py-2.5 bg-white text-blue-900 text-sm font-bold rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+      >
+        ← Back to Dashboard
+      </button>
+    )}
+  </div>
+</div>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
 
@@ -115,7 +125,7 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
               <Card key={p.id} onClick={() => openDetail(p)} className="overflow-hidden">
                 <div className="flex">
                   <div
-                    className={`w-1.5 flex-shrink-0
+                    className={`w-1.5 shrink-0
                       ${p.urgency === "High"   ? "bg-amber-400"
                       : p.urgency === "Medium" ? "bg-sky-400"
                       : "bg-emerald-400"}`}
@@ -140,7 +150,7 @@ export default function MarketplacePage({ setPage, setSelectedProject, role, onL
                         </div>
                       </div>
 
-                      <div className="text-right flex-shrink-0">
+                      <div className="text-right shrink-0">
                         <p className="text-xl font-black text-blue-900">
                           ${p.budgetMin.toLocaleString()}–${p.budgetMax.toLocaleString()}
                         </p>

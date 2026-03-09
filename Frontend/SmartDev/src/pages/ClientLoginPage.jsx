@@ -38,7 +38,7 @@ export default function ClientLoginPage({ setPage, onLogin }) {
     <div className="min-h-screen flex">
       {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
 
-      <AuthPanel gradient="bg-gradient-to-br from-amber-700 to-orange-600">
+      <AuthPanel gradient="bg-linear-to-br from-amber-700 to-orange-600">
         <div className="relative">
           <Logo dark onClick={() => setPage("home")} />
         </div>
@@ -136,6 +136,15 @@ export default function ClientLoginPage({ setPage, onLogin }) {
           </button>
 
           <AdminHint />
+        </div>
+
+        <div className="text-center py-3">
+          <span
+            onClick={() => setPage("home")}
+            className="text-sm text-slate-400 cursor-pointer hover:text-slate-600 transition-colors"
+          >
+            ← Back to Home
+          </span>
         </div>
 
         <div className="text-center py-4 border-t border-slate-200 bg-white">

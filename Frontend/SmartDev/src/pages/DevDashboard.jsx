@@ -36,7 +36,7 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
     <div className="min-h-screen bg-slate-50">
       <TopNav setPage={setPage} role="developer" onLogout={onLogout || (() => setPage("home"))} />
 
-      <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-10 px-6">
+      <div className="bg-linear-to-r from-blue-900 to-blue-800 py-10 px-6">
         <div className="max-w-7xl mx-auto flex items-center gap-5 flex-wrap">
           <div className="relative">
             <Avatar initials={dev.initials} size="lg" color="sky" />
@@ -108,7 +108,7 @@ export default function DevDashboard({ setPage, setSelectedProject, onLogout, pr
                         {a.skills.slice(0, 3).map(s => <Chip key={s} label={s} />)}
                       </div>
                     </div>
-                    <div className="text-right flex-shrink-0">
+                    <div className="text-right shrink-0">
                       <p className="font-black text-blue-900 text-lg">
                         ${a.budgetMin.toLocaleString()}–${a.budgetMax.toLocaleString()}
                       </p>

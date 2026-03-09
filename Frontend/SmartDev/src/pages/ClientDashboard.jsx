@@ -10,7 +10,7 @@ export default function ClientDashboard({ setPage, setSelectedProject, onLogout,
     <div className="min-h-screen bg-slate-50">
       <TopNav setPage={setPage} role="client" onLogout={onLogout || (() => setPage("home"))} />
 
-      <div className="bg-gradient-to-r from-amber-700 to-orange-600 py-10 px-6">
+      <div className="bg-linear-to-r from-amber-700 to-orange-600 py-10 px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-4">
           <div>
             <h1 className="text-2xl font-black text-white">Client Dashboard</h1>
@@ -62,7 +62,7 @@ export default function ClientDashboard({ setPage, setSelectedProject, onLogout,
                       {p.skills.slice(0, 3).map(s => <Chip key={s} label={s} />)}
                     </div>
                   </div>
-                  <div className="text-right flex-shrink-0">
+                  <div className="text-right shrink-0">
                     <p className="font-black text-blue-900 text-lg">
                       ${p.budgetMin.toLocaleString()}–${p.budgetMax.toLocaleString()}
                     </p>
@@ -70,6 +70,7 @@ export default function ClientDashboard({ setPage, setSelectedProject, onLogout,
                     <Btn
                       size="sm" variant="outline"
                       onClick={e => { e.stopPropagation(); setSelectedProject(p); setPage("project-detail"); }}
+                       className="px-3 py-1.5 text-sm font-semibold border-2 border-blue-900 text-blue-900 hover:bg-blue-50 rounded-xl transition-all"
                     >
                       Manage →
                     </Btn>
@@ -83,7 +84,7 @@ export default function ClientDashboard({ setPage, setSelectedProject, onLogout,
         {tab === "recommendations" && (
           <div>
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-5 flex items-start gap-3">
-              <span className="text-xl flex-shrink-0">🎯</span>
+              <span className="text-xl shrink-0">🎯</span>
               <p className="text-blue-800 text-sm font-semibold">
                 AI engine ranked these developers across all your open projects using the weighted matching formula
                 (Skills 40% + Experience 20% + Rating 30% + On-Time 10%).
@@ -144,7 +145,7 @@ function PostProjectForm({ onSuccess }) {
 
   if (done) return (
     <div className="max-w-md mx-auto text-center py-16">
-      <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-sky-500 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 shadow-xl">
+      <div className="w-20 h-20 bg-linear-to-br from-amber-500 to-sky-500 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 shadow-xl">
         🚀
       </div>
       <h2 className="text-2xl font-black text-slate-800 mb-3">Project Published!</h2>
