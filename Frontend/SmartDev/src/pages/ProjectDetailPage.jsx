@@ -10,7 +10,7 @@ const TIMELINE_STEPS = [
   "Development Sprint 2",
   "Testing & QA",
   "Client Review",
-  "Launch & Handover",W
+  "Launch & Handover",
 ];
 
 const AVATAR_COLORS = ["blue","sky","green","amber","purple","pink"];
