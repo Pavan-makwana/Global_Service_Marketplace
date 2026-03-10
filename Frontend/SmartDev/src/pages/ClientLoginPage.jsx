@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { Logo, Input, PasswordInput, Btn, Toast, Divider, AdminHint, AuthPanel, BenefitList } from "../components/ui";
-import { ADMIN_CREDENTIALS } from "../constants/data";
-
-
+import { Logo, Input, PasswordInput, Btn, Toast, AdminHint, AuthPanel, BenefitList } from "../components/ui";
+import { Building2 } from "lucide-react";
 
 export default function ClientLoginPage({ setPage, onLogin }) {
   const [email, setEmail]       = useState("");
@@ -12,7 +10,7 @@ export default function ClientLoginPage({ setPage, onLogin }) {
   const [toast, setToast]       = useState(null);
   const [remember, setRemember] = useState(false);
 
-  const submit = () => {
+  const submit = async () => {
     const e = {};
     if (!email) e.email = "Email is required";
     if (!pass)  e.pass  = "Password is required";
@@ -20,31 +18,45 @@ export default function ClientLoginPage({ setPage, onLogin }) {
     if (Object.keys(e).length) return;
 
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-
-      if (email === ADMIN_CREDENTIALS.email && pass === ADMIN_CREDENTIALS.password) {
-        setToast({ msg: "Admin detected — redirecting to Admin Dashboard…", type: "success" });
-        setTimeout(() => onLogin("admin"), 1300);
-        return;
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass })
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || "Invalid credentials");
       }
 
+      if (data.user.role !== 'Client') {
+        throw new Error("Access Denied: Client account required.");
+      }
+
+      localStorage.setItem('token', data.token);
       setToast({ msg: "Signed in as Client!", type: "success" });
-      setTimeout(() => onLogin("client"), 1000);
-    }, 900);
+      setTimeout(() => onLogin("client", data.token), 1000);
+
+    } catch (err) {
+      setErrors({ pass: err.message });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen flex">
       {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
 
-      <AuthPanel gradient="bg-linear-to-br from-amber-700 to-orange-600">
+      <AuthPanel gradient="bg-gradient-to-br from-amber-700 to-orange-600">
         <div className="relative">
           <Logo dark onClick={() => setPage("home")} />
         </div>
 
         <div className="flex-1 flex flex-col justify-center relative mt-10">
-          <div className="text-7xl mb-5">🏢</div>
+          <Building2 className="w-16 h-16 text-white mb-5" />
           <h2 className="text-3xl font-black text-white mb-3 leading-tight">
             Welcome back,<br />Client.
           </h2>
@@ -61,16 +73,6 @@ export default function ClientLoginPage({ setPage, onLogin }) {
             textColor="text-amber-100"
             checkColor="text-amber-200"
           />
-        </div>
-
-        <div className="relative bg-white/10 border border-white/20 rounded-xl p-4 backdrop-blur-sm">
-          <p className="text-xs font-bold text-amber-200 mb-1">🛡 Admin Access</p>
-          <p className="text-amber-100 text-xs leading-relaxed">
-            Use{" "}
-            <span className="font-mono text-white">admin@SmartDev Marketplace.com</span>
-            {" "}/ <span className="font-mono text-white">Admin@2025</span>
-            {" "}to access the Admin Dashboard.
-          </p>
         </div>
       </AuthPanel>
 
@@ -89,7 +91,7 @@ export default function ClientLoginPage({ setPage, onLogin }) {
         <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full px-8 py-10">
           <div className="mb-6">
             <span className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full mb-3">
-              🏢 CLIENT PORTAL
+              <Building2 className="w-3 h-3" /> CLIENT PORTAL
             </span>
             <h1 className="text-2xl font-black text-slate-800 mb-1">Sign in to your account</h1>
             <p className="text-slate-500 text-sm">Access your projects and developer matches.</p>
@@ -99,16 +101,14 @@ export default function ClientLoginPage({ setPage, onLogin }) {
             label="Work Email" type="email"
             placeholder="you@company.com"
             value={email} onChange={setEmail}
-            icon="✉" error={errors.email} required
+             error={errors.email} required
           />
 
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-              Password <span className="text-red-500">*</span>
-            </label>
             <PasswordInput
+              label="Password"
               value={pass} onChange={setPass}
-              error={errors.pass}
+              error={errors.pass} required
             />
           </div>
 

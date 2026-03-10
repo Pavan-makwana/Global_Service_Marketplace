@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { ADMIN_CREDENTIALS } from "../constants/data";
-
-
+import { Settings, Mail, Lock, Eye, EyeOff, AlertTriangle, ArrowLeft } from "lucide-react";
 
 export default function AdminLoginPage({ setPage, onLogin }) {
   const [email, setEmail]   = useState("");
@@ -10,21 +8,45 @@ export default function AdminLoginPage({ setPage, onLogin }) {
   const [loading, setLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
 
-  const submit = () => {
+  const submit = async () => {
     if (!email || !pass) {
       setError("Both email and password are required.");
       return;
     }
     setError("");
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      if (email === ADMIN_CREDENTIALS.email && pass === ADMIN_CREDENTIALS.password) {
-        onLogin("admin");
-      } else {
-        setError("Invalid admin credentials. Please check your email and password.");
+
+    try {
+      // 🔥 1. Call real Node.js backend
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass })
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || "Invalid credentials");
       }
-    }, 900);
+
+      // 🔥 2. Security Check: Only allow Admins to use this portal
+      if (data.user.role !== 'Admin') {
+        throw new Error("Access Denied: Admin privileges required.");
+      }
+
+      // 🔥 3. Save token
+      localStorage.setItem('token', data.token);
+
+      // Delay slightly for smooth UX
+      setTimeout(() => {
+        onLogin("admin", data.token);
+      }, 800);
+
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -37,7 +59,7 @@ export default function AdminLoginPage({ setPage, onLogin }) {
             className="cursor-pointer inline-block mb-4"
           >
             <div className="w-16 h-16 bg-linear-to-br from-blue-600 to-sky-400 rounded-2xl flex items-center justify-center mx-auto shadow-2xl">
-              <span className="text-white font-black text-2xl leading-none">N</span>
+              <span className="text-white font-black text-2xl leading-none">SD</span>
             </div>
           </div>
           <h1 className="text-3xl font-black text-white mb-1 tracking-tight">Admin Portal</h1>
@@ -47,10 +69,10 @@ export default function AdminLoginPage({ setPage, onLogin }) {
         <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
 
           <div className="flex items-center gap-3 bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 mb-6">
-            <span className="text-amber-400 text-xl shrink-0">⚙️</span>
+            <Settings className="text-amber-400 w-6 h-6 shrink-0" />
             <div>
               <p className="text-amber-300 text-xs font-bold uppercase tracking-widest mb-0.5">Admin Credentials</p>
-              <p className="text-amber-200 text-xs font-mono">admin@SmartDev Marketplace.com · Admin@2025</p>
+              <p className="text-amber-200 text-xs font-mono">Use your provisioned master account</p>
             </div>
           </div>
 
@@ -59,10 +81,10 @@ export default function AdminLoginPage({ setPage, onLogin }) {
               Admin Email <span className="text-red-400">*</span>
             </label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">✉</span>
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4 pointer-events-none" />
               <input
                 type="email"
-                placeholder="admin@SmartDev Marketplace.com"
+                placeholder="admin@spartantech.com"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 pl-9 pr-4 text-sm text-white
@@ -77,7 +99,7 @@ export default function AdminLoginPage({ setPage, onLogin }) {
               Password <span className="text-red-400">*</span>
             </label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">🔒</span>
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4 pointer-events-none" />
               <input
                 type={showPass ? "text" : "password"}
                 placeholder="••••••••"
@@ -93,14 +115,15 @@ export default function AdminLoginPage({ setPage, onLogin }) {
                 onClick={() => setShowPass(!showPass)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 text-base"
               >
-                {showPass ? "🙈" : "👁"}
+                {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
           </div>
 
           {error && (
             <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-red-400 text-sm mb-4 flex items-center gap-2">
-              <span>⚠</span> {error}
+              <AlertTriangle className="w-4 h-4 shrink-0" />
+              <span>{error}</span>
             </div>
           )}
 
@@ -110,7 +133,7 @@ export default function AdminLoginPage({ setPage, onLogin }) {
             className={`w-full py-3 rounded-xl font-bold text-white text-sm transition-all shadow-lg
               ${loading
                 ? "bg-blue-700 cursor-not-allowed opacity-70"
-                : "bg-linear-to-r from-blue-700 to-sky-600 hover:opacity-90 shadow-blue-900/30"
+                : "bg-gradient-to-r from-blue-700 to-sky-600 hover:opacity-90 shadow-blue-900/30"
               }`}
           >
             {loading ? "Authenticating…" : "Access Admin Dashboard →"}
@@ -124,9 +147,9 @@ export default function AdminLoginPage({ setPage, onLogin }) {
         <div className="text-center mt-6">
           <span
             onClick={() => setPage("home")}
-            className="text-slate-500 text-sm cursor-pointer hover:text-slate-300 transition-colors"
+            className="inline-flex items-center gap-1.5 text-slate-500 text-sm cursor-pointer hover:text-slate-300 transition-colors"
           >
-            ← Back to Home
+            <ArrowLeft className="w-4 h-4" /> Back to Home
           </span>
         </div>
       </div>

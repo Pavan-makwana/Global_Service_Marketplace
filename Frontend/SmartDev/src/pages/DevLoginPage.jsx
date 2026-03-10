@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Logo, Input, PasswordInput, Btn, Toast, Divider, PillLabel, AuthPanel, BenefitList, AdminHint } from "../components/ui";
-import { ADMIN_CREDENTIALS } from "../constants/data";
+import { Logo, Input, PasswordInput, Btn, Toast, PillLabel, AuthPanel, BenefitList, AdminHint } from "../components/ui";
+import { Monitor } from "lucide-react";
 
 export default function DevLoginPage({ setPage, onLogin }) {
   const [email, setEmail]     = useState("");
@@ -10,7 +10,7 @@ export default function DevLoginPage({ setPage, onLogin }) {
   const [toast, setToast]     = useState(null);
   const [remember, setRemember] = useState(false);
 
-  const submit = () => {
+  const submit = async () => {
     const e = {};
     if (!email) e.email = "Email is required";
     if (!pass)  e.pass  = "Password is required";
@@ -18,33 +18,45 @@ export default function DevLoginPage({ setPage, onLogin }) {
     if (Object.keys(e).length) return;
 
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-
-      // Admin credential detection
-      if (email === ADMIN_CREDENTIALS.email && pass === ADMIN_CREDENTIALS.password) {
-        setToast({ msg: "Admin detected — redirecting to Admin Dashboard…", type: "success" });
-        setTimeout(() => onLogin("admin"), 1300);
-        return;
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass })
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || "Invalid credentials");
       }
 
-      // Regular developer login
+      if (data.user.role !== 'Developer') {
+        throw new Error("Access Denied: Developer account required.");
+      }
+
+      localStorage.setItem('token', data.token);
       setToast({ msg: "Signed in as Developer!", type: "success" });
-      setTimeout(() => onLogin("developer"), 1000);
-    }, 900);
+      setTimeout(() => onLogin("developer", data.token), 1000);
+
+    } catch (err) {
+      setErrors({ pass: err.message });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen flex">
       {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
 
-      <AuthPanel gradient="bg-linear-to-br from-blue-900 to-blue-800">
+      <AuthPanel gradient="bg-gradient-to-br from-blue-900 to-blue-800">
         <div className="relative">
           <Logo dark onClick={() => setPage("home")} />
         </div>
 
         <div className="flex-1 flex flex-col justify-center relative mt-10">
-          <div className="text-7xl mb-5">💻</div>
+          <Monitor className="w-16 h-16 text-white mb-5" />
           <h2 className="text-3xl font-black text-white mb-3 leading-tight">
             Welcome back,<br />Developer.
           </h2>
@@ -59,16 +71,6 @@ export default function DevLoginPage({ setPage, onLogin }) {
               "View earnings and client reviews",
             ]}
           />
-        </div>
-
-        <div className="relative bg-white/10 border border-white/15 rounded-xl p-4 backdrop-blur-sm">
-          <p className="text-xs font-bold text-sky-300 mb-1">🛡 Admin Access</p>
-          <p className="text-blue-200 text-xs leading-relaxed">
-            Use{" "}
-            <span className="font-mono text-sky-300">admin@SmartDev Marketplace.com</span>
-            {" "}/ <span className="font-mono text-sky-300">Admin@2025</span>
-            {" "}on this form to access the Admin Dashboard.
-          </p>
         </div>
       </AuthPanel>
 
@@ -86,17 +88,16 @@ export default function DevLoginPage({ setPage, onLogin }) {
 
         <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full px-8 py-10">
           <div className="mb-6">
-            <PillLabel color="blue">💻 DEVELOPER PORTAL</PillLabel>
+            <PillLabel color="blue"><Monitor className="w-3 h-3 inline-block" /> DEVELOPER PORTAL</PillLabel>
             <h1 className="text-2xl font-black text-slate-800 mb-1">Sign in to your account</h1>
             <p className="text-slate-500 text-sm">Welcome back! Enter your credentials to continue.</p>
           </div>
 
-  
           <Input
             label="Email Address" type="email"
             placeholder="developer@example.com"
             value={email} onChange={setEmail}
-            icon="✉" error={errors.email} required
+             error={errors.email} required
           />
           <PasswordInput
             label="Password"
