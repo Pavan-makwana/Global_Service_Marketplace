@@ -91,7 +91,7 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
   };
 
   if (done) return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-linear-to-br from-amber-50 to-orange-50 flex items-center justify-center p-6">
       <div className="text-center max-w-md w-full">
         <div className="w-20 h-20 bg-amber-500 rounded-full flex items-center justify-center text-white mx-auto mb-6 shadow-xl">
           <CheckCircle2 className="w-10 h-10" />

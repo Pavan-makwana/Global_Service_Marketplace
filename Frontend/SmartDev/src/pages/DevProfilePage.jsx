@@ -182,7 +182,7 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
                         </div>
                         <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-gradient-to-r from-blue-900 to-sky-500 rounded-full transition-all"
+                            className="h-full bg-linear-to-r from-blue-900 to-sky-500 rounded-full transition-all"
                             style={{ width:`${pct}%` }}
                           />
                         </div>
@@ -232,7 +232,7 @@ export default function DevProfilePage({ dev, setPage, role, onLogout }) {
                       </div>
                       <div className="flex items-center gap-1 text-amber-400">
                         {[...Array(Math.floor(r.client_rating))].map((_,idx) => <Star key={idx} className="w-3.5 h-3.5 fill-current" />)}
-                        <span className="text-xs text-slate-400 ml-2 font-bold text-slate-700">{r.client_rating}/5.0</span>
+                        <span className="text-xs text-slate-700 ml-2 font-bold text-slate-700">{r.client_rating}/5.0</span>
                       </div>
                     </div>
                     <p className="text-slate-600 text-sm leading-relaxed italic">
