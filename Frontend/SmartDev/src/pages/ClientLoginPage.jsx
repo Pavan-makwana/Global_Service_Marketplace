@@ -99,7 +99,7 @@ export default function ClientLoginPage({ setPage, onLogin }) {
 
           <Input
             label="Work Email" type="email"
-            placeholder="you@company.com"
+            placeholder="client@spartantech.com"
             value={email} onChange={setEmail}
              error={errors.email} required
           />

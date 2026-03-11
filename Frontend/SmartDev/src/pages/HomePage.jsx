@@ -252,8 +252,8 @@ export default function HomePage({ setPage }) {
         <p className="text-slate-500 text-sm mt-3">© 2025 SmartDev Marketplace · Spartan Tech Internal Platform · Frontend: Swastika</p>
         <p className="text-slate-600 text-xs mt-1">
           Admin:{" "}
-          <span className="text-sky-400 font-mono">admin@SmartDev Marketplace.com</span>
-          {" "}/ <span className="text-sky-400 font-mono">Admin@2025</span>
+          <span className="text-sky-400 font-mono">admin@spartantech.com</span>
+          {" "}/ <span className="text-sky-400 font-mono">admin</span>
         </p>
       </footer>
     </div>

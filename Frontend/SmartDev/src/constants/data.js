@@ -1,7 +1,7 @@
 
 export const ADMIN_CREDENTIALS = {
-  email: "admin@SmartDev Marketplace.com",
-  password: "Admin@2025",
+  email: "admin@spartantech.com",
+  password: "admin",
 };
 
 export const SKILLS_LIST = [

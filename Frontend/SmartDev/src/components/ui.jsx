@@ -457,7 +457,7 @@ export const BenefitList = ({ items, textColor = "text-blue-100", checkColor = "
 export const AdminHint = () => (
   <div className="mt-5 bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-emerald-800">
     <strong>🛡 Admin?</strong> Enter{" "}
-    <code className="bg-white px-1 rounded border border-emerald-100">admin@SmartDev Marketplace.com</code>
-    {" "}/ <code className="bg-white px-1 rounded border border-emerald-100">Admin@2025</code> above.
+    <code className="bg-white px-1 rounded border border-emerald-100">admin@spartantech.com</code>
+    {" "}/ <code className="bg-white px-1 rounded border border-emerald-100">admin</code> above.
   </div>
 );

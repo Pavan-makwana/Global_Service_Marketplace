@@ -95,7 +95,7 @@ export default function DevLoginPage({ setPage, onLogin }) {
 
           <Input
             label="Email Address" type="email"
-            placeholder="developer@example.com"
+            placeholder="developer@spartantech.com"
             value={email} onChange={setEmail}
              error={errors.email} required
           />

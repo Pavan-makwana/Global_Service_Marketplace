@@ -167,7 +167,7 @@ export default function ClientRegisterPage({ setPage, onLogin }) {
           {step === 0 && (
             <>
               <Input label="Full Name" placeholder="e.g. Sophia Werner" value={name} onChange={setName} error={errors.name} required />
-              <Input label="Work Email" type="email" placeholder="you@company.com" value={email} onChange={setEmail} error={errors.email} required />
+              <Input label="Work Email" type="email" placeholder="client@spartantech.com" value={email} onChange={setEmail} error={errors.email} required />
               <Input label="Company Name" placeholder="e.g. TechVentures GmbH" value={company} onChange={setCompany} error={errors.company} required />
               <Select label="Country" value={country} onChange={setCountry} required options={[{ value:"", label:"Select your country" }, ...COUNTRIES.map(c => ({ value:c, label:c }))]} />
               {errors.country && <p className="text-xs text-red-500 -mt-3 mb-3">⚠ {errors.country}</p>}
